@@ -1,6 +1,7 @@
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="fort-li.html">
 <link rel="import" href="fort-list-group.html">
+<link rel="import" href="../fort-theme/fort-theme-style.html">
 
 <!--
 A List
@@ -12,15 +13,57 @@ Example:
 @demo demo/index.html
 -->
 
-<dom-module id="fort-list">
+<dom-module id="fort-list" attributes="zebra border double-border">
   <template>
+    <style>
+      ::content fort-li {
+
+      }
+
+      :host[zebra] ::content fort-li:nth-child(odd) {
+        background-color: var(--theme-300-color, #F0F6FA);
+      }
+
+      :host[border] ::content fort-li,
+      :host[double-border] ::content fort-li {
+        border-bottom: 1px solid rgba(0,0,0,0.06);
+      }
+
+      :host[border] ::content fort-li:last-child,
+      :host[double-border] ::content fort-li:last-child {
+        border-bottom: 0;
+      }
+
+      :host[double-border] ::content fort-li {
+        border-top: 1px solid rgba(255, 255, 255, 0.6);
+      }
+
+      :host[double-border] ::content fort-li:first-of-type {
+        border-top: 0;
+      }
+
+    </style>
     <content select="fort-li,fort-list-group"></content>
   </template>
 
   <script>
     Polymer(
       {
-        is: 'fort-list'
+        is:         'fort-list',
+        properties: {
+          zebra:       {
+            type:  Boolean,
+            value: false
+          },
+          border:      {
+            type:  Boolean,
+            value: false
+          },
+          doubleBrder: {
+            type:  Boolean,
+            value: false
+          }
+        }
       }
     );
   </script>
