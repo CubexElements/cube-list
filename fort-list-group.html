@@ -1,0 +1,39 @@
+<link rel="import" href="../polymer/polymer.html">
+
+<!--
+A List
+
+Example:
+
+    <forti-list-group title="Group Name">
+      <fort-li></fort-li>
+    </fort-list-group>
+
+@demo demo/index.html
+-->
+
+<dom-module id="fort-list-group" attributes="title">
+  <template>
+    <style include="paper-item-shared-styles"></style>
+    <style>
+      h2 {
+        @apply(--paper-font-title);
+        margin: 0;
+        @apply(--fort-list-group-title);
+      }
+    </style>
+    <h2>{{title}}</h2>
+    <content select="fort-li"></content>
+  </template>
+
+  <script>
+    Polymer(
+      {
+        is:         'fort-list-group',
+        properties: {
+          title: String
+        }
+      }
+    );
+  </script>
+</dom-module>
