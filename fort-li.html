@@ -1,0 +1,135 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../paper-item/paper-item.html">
+<link rel="import" href="../paper-item/paper-icon-item.html">
+<link rel="import" href="../paper-item/paper-item-body.html">
+<link rel="import" href="../fort-behavior/fort-text-content-behavior.html">
+<link rel="import" href="../fort-icon/fort-icon.html">
+<link rel="import" href="../fort-theme/fort-theme-style.html">
+<link rel="import" href="../fort-action/fort-action.html">
+<link rel="import" href="../paper-item/paper-item-shared-styles.html">
+<link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
+
+<!--
+A List Item
+
+Example:
+
+    <forti-li></fort-li>
+
+Example:
+
+    <fort-li>
+      <h2>Hello seed-element</h2>
+    </fort-li>
+
+@demo demo/fort-li.html
+-->
+
+<dom-module id="fort-li" attributes="multi-line">
+  <template strip-whitespace>
+    <style include="paper-item-shared-styles"></style>
+    <style>
+      :host {
+        padding: 0;
+      }
+
+      :host paper-icon-item {
+        width: var(--paper-item-icon-width, 56px);
+        padding: 0;
+        overflow: hidden;
+        color: var(--text-color);
+      }
+
+      :host paper-item:focus:before,
+      :host paper-icon-item:focus:before {
+        background-color: transparent;
+      }
+
+      :host paper-item-body[two-line] ::content div[secondary] {
+        height: 40px;
+      }
+
+      :host paper-item-body ::content div[secondary],
+      :host > ::content div[footer] {
+        @apply(--text-secondary);
+        color: var(--text-color);
+
+        display: inline-block;
+        display: -webkit-box;
+        white-space: normal;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+      }
+
+      :host > ::content div[footer] {
+        @apply(--paper-font-body1);
+        position: relative;
+        padding: 0 16px;
+
+        height: 34px;
+        line-height: 29px;
+
+        -webkit-line-clamp: 1;
+
+        overflow: hidden;
+      }
+    </style>
+
+    <paper-item>
+      <paper-icon-item>
+        <content select="fort-icon"></content>
+      </paper-icon-item>
+      <template is="dom-if" if="{{hasSubText}}">
+
+        <template is="dom-if" if="{{multiLine}}">
+          <paper-item-body two-line>
+            <div>{{getInnerText()}}</div>
+            <content select="div[secondary]"></content>
+          </paper-item-body>
+        </template>
+
+        <template is="dom-if" if="{{!multiLine}}">
+          <paper-item-body>
+            <div>{{getInnerText()}}</div>
+            <content select="div[secondary]"></content>
+          </paper-item-body>
+        </template>
+      </template>
+      <template is="dom-if" if="{{!hasSubText}}">
+        <paper-item-body>
+          <div>{{getInnerText()}}</div>
+        </paper-item-body>
+      </template>
+      <content select="fort-action"></content>
+    </paper-item>
+    <content select="div[footer]"></content>
+
+  </template>
+
+  <script>
+    Polymer(
+      {
+        is:         'fort-li',
+        properties: {
+          multiLine:  {
+            type:  Boolean,
+            value: false
+          },
+          hasSubText: {
+            type:  Boolean,
+            value: false
+          }
+        },
+        ready:      function ()
+                    {
+                      if(this.queryEffectiveChildren('div[secondary]'))
+                      {
+                        this.hasSubText = true;
+                      }
+                    },
+        behaviors:  [FortTextContentBehavior]
+      }
+    );
+  </script>
+</dom-module>
+
