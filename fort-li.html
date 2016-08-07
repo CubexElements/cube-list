@@ -78,10 +78,12 @@ Example:
     </style>
 
     <paper-item>
+      <template is="dom-if" if="{{_hasIcon}}">
       <paper-icon-item>
         <content select="fort-icon"></content>
       </paper-icon-item>
-      <template is="dom-if" if="{{hasSubText}}">
+        </template>
+      <template is="dom-if" if="{{_hasSubText}}">
 
         <template is="dom-if" if="{{multiLine}}">
           <paper-item-body two-line>
@@ -97,7 +99,7 @@ Example:
           </paper-item-body>
         </template>
       </template>
-      <template is="dom-if" if="{{!hasSubText}}">
+      <template is="dom-if" if="{{!_hasSubText}}">
         <paper-item-body>
           <div>{{getInnerText()}}</div>
         </paper-item-body>
@@ -117,7 +119,11 @@ Example:
             type:  Boolean,
             value: false
           },
-          hasSubText: {
+          _hasSubText: {
+            type:  Boolean,
+            value: false
+          },
+          _hasIcon: {
             type:  Boolean,
             value: false
           }
@@ -126,7 +132,11 @@ Example:
                     {
                       if(this.queryEffectiveChildren('div[secondary]'))
                       {
-                        this.hasSubText = true;
+                        this._hasSubText = true;
+                      }
+                      if(this.queryEffectiveChildren('fort-icon'))
+                      {
+                        this._hasIcon = true;
                       }
                     },
         behaviors:  [FortTextContentBehavior]
