@@ -1,4 +1,5 @@
 <link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../fort-theme/fort-theme-style.html">
 
 <!--
 A List
@@ -13,17 +14,21 @@ Example:
 -->
 
 <dom-module id="fort-list-group" attributes="title">
-  <template>
-    <style>
-      :host {
-        display: block;
-      }
+  <style>
+    :host {
+      display: block;
+    }
 
-      h2 {
-        @apply(--fort-header);
-        @apply(--fort-list-group-title);
-      }
-    </style>
+    h2 {
+      @apply(--fort-header);
+      @apply(--fort-list-group-title);
+    }
+
+    :host-context([border-group]) .list-group {
+      border: 1px solid var(--fort-list-border-color);
+    }
+  </style>
+  <template>
     <h2>{{title}}</h2>
     <div class="list-group">
       <content select="fort-li"></content>
