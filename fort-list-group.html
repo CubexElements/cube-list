@@ -1,4 +1,5 @@
 <link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../paper-item/paper-item-shared-styles.html">
 
 <!--
 A List
@@ -16,6 +17,10 @@ Example:
   <template>
     <style include="paper-item-shared-styles"></style>
     <style>
+      :host {
+        display: block;
+      }
+
       h2 {
         @apply(--paper-font-title);
         margin: 0;
