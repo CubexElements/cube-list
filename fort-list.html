@@ -20,25 +20,25 @@ Example:
         display: block;
       }
 
-      :host[zebra] ::content fort-li:nth-child(odd) {
+      :host([zebra]) ::content fort-li:nth-child(odd) {
         background-color: var(--theme-300-color, #F0F6FA);
       }
 
-      :host[border] ::content fort-li,
-      :host[double-border] ::content fort-li {
+      :host([border]) ::content fort-li,
+      :host([double-border]) ::content fort-li {
         border-bottom: 1px solid rgba(0, 0, 0, 0.06);
       }
 
-      :host[border] ::content fort-li:last-child,
-      :host[double-border] ::content fort-li:last-child {
+      :host([border]) ::content fort-li:last-child,
+      :host([double-border]) ::content fort-li:last-child {
         border-bottom: 0;
       }
 
-      :host[double-border] ::content fort-li {
+      :host([double-border]) ::content fort-li {
         border-top: 1px solid rgba(255, 255, 255, 0.6);
       }
 
-      :host[double-border] ::content fort-li:first-of-type {
+      :host([double-border]) ::content fort-li:first-of-type {
         border-top: 0;
       }
 
