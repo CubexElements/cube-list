@@ -13,7 +13,7 @@ Example:
 @demo demo/index.html
 -->
 
-<dom-module id="fort-list" attributes="zebra border double-border">
+<dom-module id="fort-list" attributes="zebra border double-border border-group">
   <template>
     <style>
       :host {
@@ -27,6 +27,10 @@ Example:
       :host([border]) ::content fort-li,
       :host([double-border]) ::content fort-li {
         border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+      }
+
+      :host([border-group]) ::content fort-list-group .list-group {
+        border: 1px solid rgba(0, 0, 0, 0.06);
       }
 
       :host([border]) ::content fort-li:last-child,
