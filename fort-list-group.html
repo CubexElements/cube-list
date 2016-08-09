@@ -16,6 +16,10 @@ Example:
 <dom-module id="fort-list-group" attributes="title">
   <style>
     :host {
+      display: none;
+    }
+
+    :host[shown] {
       display: block;
     }
 
@@ -40,8 +44,28 @@ Example:
       {
         is:         'fort-list-group',
         properties: {
-          title: String
-        }
+          title: String,
+          shown: {
+            type:               Boolean,
+            reflectToAttribute: true,
+            value:              true
+          }
+        },
+        ready:      function ()
+                    {
+                      var self = this;
+                      this.queryAllEffectiveChildren('fort-li').forEach(
+                        function (e)
+                        {
+                          e.addEventListener(
+                            'filtered', function ()
+                            {
+                              self.shown = self.queryAllEffectiveChildren('fort-li[filtered]').length > 0;
+                            }
+                          )
+                        }
+                      );
+                    }
       }
     );
   </script>

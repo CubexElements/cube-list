@@ -3,6 +3,9 @@
 <link rel="import" href="fort-list-group.html">
 <link rel="import" href="fort-list-shared-styles.html">
 <link rel="import" href="../fort-theme/fort-theme-style.html">
+<link rel="import" href="../paper-input/paper-input.html">
+<link rel="import" href="../iron-icon/iron-icon.html">
+<link rel="import" href="../iron-icons/iron-icons.html">
 
 <!--
 A List
@@ -14,7 +17,7 @@ Example:
 @demo demo/index.html
 -->
 
-<dom-module id="fort-list" attributes="zebra border double-border border-group">
+<dom-module id="fort-list" attributes="zebra border double-border border-group show-filter filter-label">
   <style>
     :host {
       display: block;
@@ -42,8 +45,19 @@ Example:
       border-top: 0;
     }
 
+    :host .filter {
+      @apply(--fort-list-filter);
+    }
+
   </style>
   <template>
+    <template is="dom-if" if="{{showFilter}}">
+      <div class="filter">
+        <paper-input label="{{filterLabel}}" no-label-float on-keyup="filterList">
+          <iron-icon icon="icons:filter-list" prefix></iron-icon>
+        </paper-input>
+      </div>
+    </template>
     <content select="fort-li,fort-list-group"></content>
   </template>
 
@@ -52,6 +66,14 @@ Example:
       {
         is:         'fort-list',
         properties: {
+          showFilter:  {
+            type:  Boolean,
+            value: false
+          },
+          filterLabel: {
+            type:  String,
+            value: "Filter"
+          },
           zebra:       {
             type:  Boolean,
             value: false
@@ -64,7 +86,11 @@ Example:
             type:  Boolean,
             value: false
           }
-        }
+        },
+        filterList: function (e)
+                    {
+                      this.fire('filter', {value: event.target.value});
+                    }
       }
     );
   </script>

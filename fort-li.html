@@ -25,12 +25,17 @@ Example:
 @demo demo/fort-li.html
 -->
 
-<dom-module id="fort-li" attributes="multi-line">
+<dom-module id="fort-li" attributes="multi-line filtered">
   <template strip-whitespace>
     <style include="paper-item-shared-styles"></style>
     <style>
       :host {
         padding: 0;
+        display: none;
+      }
+
+      :host([filtered]) {
+        display: block;
       }
 
       :host paper-icon-item {
@@ -76,7 +81,6 @@ Example:
         @apply(--fort-li-footer);
       }
     </style>
-
     <paper-item>
       <template is="dom-if" if="{{_hasIcon}}">
         <paper-icon-item>
@@ -107,7 +111,6 @@ Example:
       <content select="fort-action"></content>
     </paper-item>
     <content select="div[footer]"></content>
-
   </template>
 
   <script>
@@ -115,6 +118,11 @@ Example:
       {
         is:         'fort-li',
         properties: {
+          filtered:    {
+            type:               Boolean,
+            reflectToAttribute: true,
+            value:              true
+          },
           multiLine:   {
             type:  Boolean,
             value: false
@@ -137,6 +145,26 @@ Example:
                       if(this.queryEffectiveChildren('fort-icon'))
                       {
                         this._hasIcon = true;
+                      }
+                      var node = this.parentNode;
+                      while(node && node.tagName != "FORT-LIST")
+                      {
+                        node = node.parentNode;
+                      }
+
+                      if(node)
+                      {
+                        var self = this;
+                        node.addEventListener(
+                          'filter', function (e)
+                          {
+                            self.filtered = e.detail.value == ""
+                              || self.getEffectiveTextContent()
+                                     .toLowerCase()
+                                     .indexOf(e.detail.value.toLowerCase()) >= 0;
+                            self.fire('filtered', {value: self.filtered});
+                          }
+                        );
                       }
                     },
         behaviors:  [FortTextContentBehavior]
