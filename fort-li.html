@@ -1,5 +1,4 @@
 <link rel="import" href="../polymer/polymer.html">
-<link rel="import" href="../paper-item/paper-item.html">
 <link rel="import" href="../paper-item/paper-icon-item.html">
 <link rel="import" href="../paper-item/paper-item-body.html">
 <link rel="import" href="../fort-behavior/fort-text-content-behavior.html">
@@ -38,14 +37,13 @@ Example:
         display: block;
       }
 
-      :host paper-icon-item {
+      :host paper-icon-item fort-icon {
         width: var(--paper-item-icon-width, 56px);
         padding: 0;
         overflow: hidden;
         color: var(--text-color);
       }
 
-      :host paper-item:focus:before,
       :host paper-icon-item:focus:before {
         background-color: transparent;
       }
@@ -81,12 +79,8 @@ Example:
         @apply(--fort-li-footer);
       }
     </style>
-    <paper-item>
-      <template is="dom-if" if="{{_hasIcon}}">
-        <paper-icon-item>
-          <content select="fort-icon"></content>
-        </paper-icon-item>
-      </template>
+    <paper-icon-item>
+      <content select="fort-icon"></content>
       <template is="dom-if" if="{{_hasSubText}}">
 
         <template is="dom-if" if="{{multiLine}}">
@@ -109,7 +103,7 @@ Example:
         </paper-item-body>
       </template>
       <content select="fort-action"></content>
-    </paper-item>
+    </paper-icon-item>
     <content select="div[footer]"></content>
   </template>
 
