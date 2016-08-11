@@ -17,7 +17,8 @@ Example:
 @demo demo/index.html
 -->
 
-<dom-module id="fort-list" attributes="zebra border double-border border-group show-filter filter-label filter-icon">
+<dom-module id="fort-list"
+            attributes="zebra border double-border border-group show-filter filter-label filter-icon filter-autofocus">
   <style>
     :host {
       display: block;
@@ -77,7 +78,8 @@ Example:
   <template>
     <template is="dom-if" if="{{showFilter}}">
       <div class="filter">
-        <paper-input label="{{filterLabel}}" no-label-float on-keyup="filterList">
+        <paper-input autofocus$="[[filter-autofocus]]" id="filterinput" label="{{filterLabel}}" no-label-float
+                     on-keyup="filterList">
           <iron-icon icon="{{filterIcon}}" prefix></iron-icon>
         </paper-input>
       </div>
