@@ -17,7 +17,7 @@ Example:
 @demo demo/index.html
 -->
 
-<dom-module id="fort-list" attributes="zebra border double-border border-group show-filter filter-label">
+<dom-module id="fort-list" attributes="zebra border double-border border-group show-filter filter-label filter-icon">
   <style>
     :host {
       display: block;
@@ -74,7 +74,7 @@ Example:
     <template is="dom-if" if="{{showFilter}}">
       <div class="filter">
         <paper-input label="{{filterLabel}}" no-label-float on-keyup="filterList">
-          <iron-icon icon="icons:filter-list" prefix></iron-icon>
+          <iron-icon icon="{{filterIcon}}" prefix></iron-icon>
         </paper-input>
       </div>
     </template>
@@ -93,6 +93,10 @@ Example:
           filterLabel: {
             type:  String,
             value: "Filter"
+          },
+          filterIcon:  {
+            type:  String,
+            value: "icons:filter-list"
           },
           zebra:       {
             type:  Boolean,
