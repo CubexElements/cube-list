@@ -18,7 +18,7 @@ Example:
 -->
 
 <dom-module id="fort-list"
-            attributes="zebra border double-border border-group show-filter filter-label filter-icon filter-autofocus">
+            attributes="zebra border double-border border-group show-filter filter-label filter-icon autofocus">
   <style>
     :host {
       display: block;
@@ -51,7 +51,12 @@ Example:
       margin-right: 32px;
     }
 
+    :host([show-filter]) .filter {
+      display: block;
+    }
+
     :host .filter {
+      display: none;
       @apply(--text-secondary);
       @apply(--paper-font-body2);
       @apply(--fort-list-filter);
@@ -76,14 +81,12 @@ Example:
     }
   </style>
   <template>
-    <template is="dom-if" if="{{showFilter}}">
-      <div class="filter">
-        <paper-input autofocus$="[[filter-autofocus]]" id="filterinput" label="{{filterLabel}}" no-label-float
-                     on-keyup="filterList">
-          <iron-icon icon="{{filterIcon}}" prefix></iron-icon>
-        </paper-input>
-      </div>
-    </template>
+    <div class="filter">
+      <paper-input autofocus$="[[autofocus]]" id="filterinput" label="{{filterLabel}}" no-label-float
+                   on-keyup="filterList">
+        <iron-icon icon="{{filterIcon}}" prefix></iron-icon>
+      </paper-input>
+    </div>
     <div class="items">
       <content select="fort-li,fort-list-group"></content>
     </div>
@@ -119,6 +122,10 @@ Example:
             value: false
           }
         },
+        focus:      function ()
+                    {
+                      this.$.filterinput.focus();
+                    },
         filterList: function (e)
                     {
                       this.fire('filter', {value: event.target.value});
