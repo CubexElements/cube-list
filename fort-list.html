@@ -56,6 +56,10 @@ Example:
       @apply(--fort-list-filter);
     }
 
+    :host .items {
+      @apply(--fort-list-items-container);
+    }
+
     :host .filter paper-input {
       height: 48px;
     }
@@ -78,7 +82,9 @@ Example:
         </paper-input>
       </div>
     </template>
-    <content select="fort-li,fort-list-group"></content>
+    <div class="items">
+      <content select="fort-li,fort-list-group"></content>
+    </div>
   </template>
 
   <script>
