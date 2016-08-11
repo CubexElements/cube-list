@@ -18,7 +18,7 @@ Example:
 -->
 
 <dom-module id="fort-list"
-            attributes="zebra border double-border border-group show-filter filter-label filter-icon autofocus">
+            attributes="zebra border double-border border-group show-filter filter-label filter-icon autofocus no-results-content">
   <style>
     :host {
       display: block;
@@ -79,6 +79,18 @@ Example:
         line-height: 48px;
       };
     }
+
+    :host .no-results {
+      display: none;
+    }
+
+    :host([no-results]) .no-results {
+      display: block;
+    }
+
+    :host .filter-value{
+
+    }
   </style>
   <template>
     <div class="filter">
@@ -88,6 +100,11 @@ Example:
       </paper-input>
     </div>
     <div class="items">
+      <div class="no-results">
+        <paper-icon-item>
+          {{noResultsContent}}&nbsp;<q class="filter-value">{{filterValue}}</q>
+        </paper-icon-item>
+      </div>
       <content select="fort-li,fort-list-group"></content>
     </div>
   </template>
@@ -97,37 +114,63 @@ Example:
       {
         is:         'fort-list',
         properties: {
-          showFilter:  {
+          filterValue:      '',
+          showFilter:       {
             type:  Boolean,
             value: false
           },
-          filterLabel: {
+          filterLabel:      {
             type:  String,
             value: "Filter"
           },
-          filterIcon:  {
+          filterIcon:       {
             type:  String,
             value: "icons:filter-list"
           },
-          zebra:       {
+          zebra:            {
             type:  Boolean,
             value: false
           },
-          border:      {
+          border:           {
             type:  Boolean,
             value: false
           },
-          doubleBrder: {
+          doubleBrder:      {
             type:  Boolean,
             value: false
+          },
+          noResults:        {
+            type:               Boolean,
+            value:              false,
+            reflectToAttribute: true
+          },
+          noResultsContent: {
+            type:  String,
+            value: "No Results Matching "
           }
         },
+        ready:      function ()
+                    {
+                      var self = this;
+                      this.querySelectorAll('fort-li').forEach(
+                        function (e)
+                        {
+                          e.addEventListener(
+                            'filtered', function ()
+                            {
+                              self.noResults = self.querySelectorAll('fort-li[filtered]').length == 0;
+                            }
+                          )
+                        }
+                      );
+                    },
         focus:      function ()
                     {
                       this.$.filterinput.focus();
                     },
         filterList: function (e)
                     {
+                      this.filterValue = event.target.value;
                       this.fire('filter', {value: event.target.value});
                     }
       }
