@@ -24,7 +24,7 @@ Example:
       display: block;
     }
 
-    :host([zebra]) ::content fort-li:nth-of-type(odd) {
+    :host([zebra]) ::content fort-li[odd] {
       background-color: var(--theme-300-color, #F0F6FA);
     }
 
@@ -88,7 +88,7 @@ Example:
       display: block;
     }
 
-    :host .filter-value{
+    :host .filter-value {
 
     }
   </style>
@@ -159,8 +159,28 @@ Example:
                             'filtered', function ()
                             {
                               self.noResults = self.querySelectorAll('fort-li[filtered]').length == 0;
+                              self.stripe('fort-li[filtered]');
                             }
-                          )
+                          );
+                        }
+                      );
+                      this.stripe('fort-li');
+                    },
+        stripe:     function (filter)
+                    {
+                      var i = 0;
+                      this.querySelectorAll(filter).forEach(
+                        function (e)
+                        {
+                          if(i % 2 == 0)
+                          {
+                            e.setAttribute('odd', true);
+                          }
+                          else
+                          {
+                            e.removeAttribute('odd');
+                          }
+                          i++;
                         }
                       );
                     },
