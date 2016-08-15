@@ -8,6 +8,10 @@
             attributes="zebra border double-border border-group show-filter filter-label filter-icon autofocus no-results-content">
   <template>
     <style>
+      :host {
+        display: block;
+      }
+
       .selectable-content > ::content fort-li.iron-selected {
         @apply(--accent-400);
       }
