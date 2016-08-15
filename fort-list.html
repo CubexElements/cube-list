@@ -193,8 +193,8 @@ Example:
                     },
         filterList: function (e)
                     {
-                      this.filterValue = event.target.value;
-                      this.fire('filter', {value: event.target.value});
+                      this.filterValue = e.target.value;
+                      this.fire('filter', {value: e.target.value});
                     },
         behaviors:  [FortIteratorBehavior]
       }

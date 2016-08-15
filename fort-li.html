@@ -1,5 +1,6 @@
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../paper-item/paper-icon-item.html">
+<link rel="import" href="../paper-item/paper-item.html">
 <link rel="import" href="../paper-item/paper-item-body.html">
 <link rel="import" href="../fort-behavior/fort-text-content-behavior.html">
 <link rel="import" href="../fort-icon/fort-icon.html">
@@ -44,6 +45,7 @@ Example:
         color: var(--text-color);
       }
 
+      :host paper-item:focus:before,
       :host paper-icon-item:focus:before {
         background-color: transparent;
       }
@@ -79,31 +81,63 @@ Example:
         @apply(--fort-li-footer);
       }
     </style>
-    <paper-icon-item>
-      <content select="fort-icon"></content>
-      <template is="dom-if" if="{{_hasSubText}}">
 
-        <template is="dom-if" if="{{multiLine}}">
-          <paper-item-body two-line>
-            <div>{{getInnerText()}}</div>
-            <content select="div[secondary]"></content>
-          </paper-item-body>
+    <template is="dom-if" if="{{_hasIcon}}">
+      <paper-icon-item>
+        <content select="fort-icon"></content>
+
+        <template is="dom-if" if="{{_hasSubText}}">
+
+          <template is="dom-if" if="{{multiLine}}">
+            <paper-item-body two-line>
+              <div>{{getInnerText()}}</div>
+              <content select="div[secondary]"></content>
+            </paper-item-body>
+          </template>
+
+          <template is="dom-if" if="{{!multiLine}}">
+            <paper-item-body>
+              <div>{{getInnerText()}}</div>
+              <content select="div[secondary]"></content>
+            </paper-item-body>
+          </template>
         </template>
-
-        <template is="dom-if" if="{{!multiLine}}">
+        <template is="dom-if" if="{{!_hasSubText}}">
           <paper-item-body>
             <div>{{getInnerText()}}</div>
-            <content select="div[secondary]"></content>
           </paper-item-body>
         </template>
-      </template>
-      <template is="dom-if" if="{{!_hasSubText}}">
-        <paper-item-body>
-          <div>{{getInnerText()}}</div>
-        </paper-item-body>
-      </template>
-      <content select="fort-action"></content>
-    </paper-icon-item>
+        <content select="fort-action"></content>
+
+      </paper-icon-item>
+    </template>
+    <template is="dom-if" if="{{!_hasIcon}}">
+      <paper-item>
+        <template is="dom-if" if="{{_hasSubText}}">
+
+          <template is="dom-if" if="{{multiLine}}">
+            <paper-item-body two-line>
+              <div>{{getInnerText()}}</div>
+              <content select="div[secondary]"></content>
+            </paper-item-body>
+          </template>
+
+          <template is="dom-if" if="{{!multiLine}}">
+            <paper-item-body>
+              <div>{{getInnerText()}}</div>
+              <content select="div[secondary]"></content>
+            </paper-item-body>
+          </template>
+        </template>
+        <template is="dom-if" if="{{!_hasSubText}}">
+          <paper-item-body>
+            <div>{{getInnerText()}}</div>
+          </paper-item-body>
+        </template>
+        <content select="fort-action"></content>
+      </paper-item>
+    </template>
+
     <content select="div[footer]"></content>
   </template>
 
@@ -160,7 +194,8 @@ Example:
                           }
                         );
                       }
-                    },
+                    }
+        ,
         behaviors:  [FortTextContentBehavior]
       }
     );
