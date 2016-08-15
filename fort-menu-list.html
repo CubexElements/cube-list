@@ -1,0 +1,64 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="fort-list.html">
+<link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../iron-menu-behavior/iron-menu-behavior.html">
+<link rel="import" href="../paper-styles/paper-styles.html">
+
+<dom-module id="fort-menu-list"
+            attributes="zebra border double-border border-group show-filter filter-label filter-icon autofocus no-results-content">
+  <template>
+    <style>
+      .selectable-content > ::content fort-li.iron-selected {
+        @apply(--accent-400);
+      }
+
+      .selectable-content > ::content fort-li:focus:before {
+        content: '';
+        pointer-events: none;
+        z-index: 2;
+        -webkit-box-shadow: 0px 1px 8px 1px rgba(46, 199, 255, 0.5);
+        -moz-box-shadow: 0px 1px 8px 1px rgba(46, 199, 255, 0.5);
+        box-shadow: 0px 1px 8px 1px rgba(46, 199, 255, 0.5);
+        background: transparent;
+        opacity: 1;
+      }
+    </style>
+
+    <div class="selectable-content">
+      <fort-list
+        zebra$="[[zebra]]"
+        border$="[[border]]"
+        double-border$="[[double-border]]"
+        border-group$="[[border-group]]"
+        show-filter$="[[show-filter]]"
+        filter-label$="[[filter-label]]"
+        filter-icon$="[[filter-icon]]"
+        autofocus$="[[autofocus]]"
+        no-results-content$="[[no-results-content]]"
+      >
+        <content></content>
+      </fort-list>
+    </div>
+  </template>
+
+  <script>
+    (function ()
+    {
+      Polymer(
+        {
+          is:           'fort-menu-list',
+          _updateItems: function ()
+                        {
+                          var nodes = Polymer.dom(this).querySelectorAll('fort-li');
+                          nodes = Array.prototype.filter.call(nodes, this._bindFilterItem);
+                          this._setItems(nodes);
+                        },
+
+          behaviors: [
+            Polymer.IronMenuBehavior
+          ]
+        }
+      );
+    })();
+  </script>
+</dom-module>
