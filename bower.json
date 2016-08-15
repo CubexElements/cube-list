@@ -23,6 +23,7 @@
   "dependencies": {
     "polymer": "Polymer/polymer#^1.6.0",
     "fort-elements": "git@github.com:FortifiElements/fort-elements.git",
+    "fort-behavior": "git@github.com:FortifiElements/fort-behavior.git",
     "paper-elements": "PolymerElements/paper-elements#^1.0.0"
   },
   "devDependencies": {

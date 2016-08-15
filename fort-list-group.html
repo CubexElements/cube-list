@@ -1,5 +1,6 @@
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../fort-theme/fort-theme-style.html">
+<link rel="import" href="../fort-behavior/fort-iterator-behavior.html">
 
 <!--
 A List
@@ -55,7 +56,8 @@ Example:
         ready:      function ()
                     {
                       var self = this;
-                      this.queryAllEffectiveChildren('fort-li').forEach(
+                      this.iterate(
+                        this.queryAllEffectiveChildren('fort-li'),
                         function (e)
                         {
                           e.addEventListener(
@@ -66,7 +68,8 @@ Example:
                           )
                         }
                       );
-                    }
+                    },
+        behaviors:  [FortIteratorBehavior]
       }
     );
   </script>
