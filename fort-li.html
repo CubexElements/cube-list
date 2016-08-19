@@ -80,13 +80,17 @@ Example:
 
         @apply(--fort-li-footer);
       }
+
+      :host([has-sub-text]) {
+        padding: 6px 0;
+      }
     </style>
 
     <template is="dom-if" if="{{_hasIcon}}">
       <paper-icon-item>
         <content select="fort-icon"></content>
 
-        <template is="dom-if" if="{{_hasSubText}}">
+        <template is="dom-if" if="{{hasSubText}}">
 
           <template is="dom-if" if="{{multiLine}}">
             <paper-item-body two-line>
@@ -102,7 +106,7 @@ Example:
             </paper-item-body>
           </template>
         </template>
-        <template is="dom-if" if="{{!_hasSubText}}">
+        <template is="dom-if" if="{{!hasSubText}}">
           <paper-item-body>
             <div>{{getInnerText()}}</div>
           </paper-item-body>
@@ -113,7 +117,7 @@ Example:
     </template>
     <template is="dom-if" if="{{!_hasIcon}}">
       <paper-item>
-        <template is="dom-if" if="{{_hasSubText}}">
+        <template is="dom-if" if="{{hasSubText}}">
 
           <template is="dom-if" if="{{multiLine}}">
             <paper-item-body two-line>
@@ -129,7 +133,7 @@ Example:
             </paper-item-body>
           </template>
         </template>
-        <template is="dom-if" if="{{!_hasSubText}}">
+        <template is="dom-if" if="{{!hasSubText}}">
           <paper-item-body>
             <div>{{getInnerText()}}</div>
           </paper-item-body>
@@ -146,20 +150,21 @@ Example:
       {
         is:         'fort-li',
         properties: {
-          filtered:    {
+          filtered:   {
             type:               Boolean,
             reflectToAttribute: true,
             value:              true
           },
-          multiLine:   {
+          multiLine:  {
             type:  Boolean,
             value: false
           },
-          _hasSubText: {
-            type:  Boolean,
-            value: false
+          hasSubText: {
+            type:               Boolean,
+            value:              false,
+            reflectToAttribute: true
           },
-          _hasIcon:    {
+          _hasIcon:   {
             type:  Boolean,
             value: false
           }
@@ -168,7 +173,7 @@ Example:
                     {
                       if(this.queryEffectiveChildren('div[secondary]'))
                       {
-                        this._hasSubText = true;
+                        this.hasSubText = true;
                       }
                       if(this.queryEffectiveChildren('fort-icon'))
                       {
