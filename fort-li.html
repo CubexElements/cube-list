@@ -56,7 +56,7 @@ Example:
 
       :host paper-item-body ::content div[secondary],
       :host > ::content div[footer] {
-        @apply(--text-secondary);
+        @apply --text-secondary;
         color: var(--text-color);
 
         display: inline-block;
@@ -67,7 +67,7 @@ Example:
       }
 
       :host > ::content div[footer] {
-        @apply(--paper-font-body1);
+        @apply --paper-font-body1;
         position: relative;
         padding: 0 16px;
 
@@ -78,7 +78,7 @@ Example:
 
         overflow: hidden;
 
-        @apply(--fort-li-footer);
+        @apply --fort-li-footer;
       }
 
       :host([has-sub-text]) {
