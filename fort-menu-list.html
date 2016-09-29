@@ -29,23 +29,26 @@
   </template>
 
   <script>
-    (function ()
-    {
-      Polymer(
-        {
-          is:           'fort-menu-list',
-          _updateItems: function ()
-                        {
-                          var nodes = Polymer.dom(this).querySelectorAll('fort-li');
-                          nodes = Array.prototype.filter.call(nodes, this._bindFilterItem);
-                          this._setItems(nodes);
-                        },
+    Polymer(
+      {
+        is:           'fort-menu-list',
+        _updateItems: function ()
+                      {
+                        var nodes = Polymer.dom(this).querySelectorAll('fort-li');
+                        nodes = Array.prototype.filter.call(nodes, this._bindFilterItem);
+                        this._setItems(nodes);
+                      },
 
-          behaviors: [
-            Polymer.IronMenuBehavior
-          ]
-        }
-      );
-    })();
+        // override _activateHandler to prevent it from stopping propagation
+        _activateHandler: function (event)
+                          {
+                            Polymer.IronSelectableBehavior._activateHandler.call(this, event);
+                          },
+
+        behaviors: [
+          Polymer.IronMenuBehavior
+        ]
+      }
+    );
   </script>
 </dom-module>
