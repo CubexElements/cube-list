@@ -4,7 +4,7 @@
 
 <dom-module id="fort-menu-list"
             attributes="zebra border double-border border-group show-filter filter-label filter-icon autofocus no-results-content">
-  <template>
+  <template strip-whitespace>
     <style>
       :host {
         display: block;
@@ -23,7 +23,7 @@
         autofocus$="[[autofocus]]"
         no-results-content$="[[no-results-content]]"
       >
-        <content></content>
+        <content select="fort-li,fort-list-group"></content>
       </fort-list>
     </div>
   </template>
@@ -31,13 +31,17 @@
   <script>
     Polymer(
       {
-        is:           'fort-menu-list',
-        _updateItems: function ()
-                      {
-                        var nodes = Polymer.dom(this).querySelectorAll('fort-li');
-                        nodes = Array.prototype.filter.call(nodes, this._bindFilterItem);
-                        this._setItems(nodes);
-                      },
+        is:         'fort-menu-list',
+        properties: {selectable: 'fort-li'},
+
+        keyBindings: {
+          'enter': '_mutateEnterToTap'
+        },
+
+        _mutateEnterToTap: function (e)
+                           {
+                             e.detail.keyboardEvent.target.fire('tap');
+                           },
 
         // override _activateHandler to prevent it from stopping propagation
         _activateHandler: function (event)
