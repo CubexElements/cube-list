@@ -31,14 +31,15 @@ Example:
     <style include="paper-item-shared-styles"></style>
     <style>
       :host {
-
         display: none;
 
-        @apply(--layout-horizontal);
-        @apply(--layout-center);
-        @apply(--paper-font-subhead);
+        @apply --fort-li-style;
 
-        @apply(--paper-item);
+        @apply --layout-horizontal;
+        @apply --layout-center;
+        @apply --paper-font-subhead;
+
+        @apply --paper-item;
       }
 
       :host(:focus) {
@@ -57,7 +58,7 @@ Example:
       }
 
       :host(:focus):before {
-        background-color: transparent;
+        background-color: var(--primary);
       }
 
       :host paper-item-body[two-line] ::content div[secondary] {
