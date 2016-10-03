@@ -57,8 +57,8 @@ Example:
         color: var(--text-color);
       }
 
-      :host(:focus):before {
-        background-color: var(--primary);
+      :not(:host-context(fort-menu-list)):host(:focus):before {
+        background-color: transparent;
       }
 
       :host paper-item-body[two-line] ::content div[secondary] {
