@@ -1,5 +1,4 @@
 <link rel="import" href="../polymer/polymer.html">
-<link rel="import" href="../paper-item/paper-icon-item.html">
 <link rel="import" href="../paper-item/paper-item.html">
 <link rel="import" href="../paper-item/paper-item-body.html">
 <link rel="import" href="../fort-behavior/fort-text-content-behavior.html">
@@ -62,8 +61,8 @@ Example:
         background-color: transparent;
       }
 
-      :host paper-item-body[two-line] ::content div[secondary] {
-        height: 40px;
+      :host paper-item-body[two-line] {
+        min-height: initial;
       }
 
       :host paper-item-body ::content div[secondary],
@@ -93,8 +92,8 @@ Example:
       }
 
       :host([has-sub-text]) {
-        padding-top: 8px;
-        padding-bottom: 4px;
+        padding-top: 6px;
+        padding-bottom: 6px;
       }
 
       #icon-container {
@@ -106,6 +105,7 @@ Example:
       #container {
         display: flex;
         min-height: 48px;
+        align-items: center;
       }
     </style>
 
