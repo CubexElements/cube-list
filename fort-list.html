@@ -167,7 +167,7 @@ Example:
                      {
                        var visibleCount
                          = this._doFilter(filterValue, this.queryAllEffectiveChildren('fort-li,fort-list-group'), this);
-                       this.noResults = visibleCount == 0;
+                       this.noResults = this.showFilter && visibleCount == 0;
                      },
         _doFilter:   function (filterValue, items, parentNode)
                      {
