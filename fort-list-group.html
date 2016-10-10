@@ -57,24 +57,7 @@ Example:
             reflectToAttribute: true,
             value:              true
           }
-        },
-        ready:      function ()
-                    {
-                      var self = this;
-                      this.iterate(
-                        this.queryAllEffectiveChildren('fort-li'),
-                        function (e)
-                        {
-                          e.addEventListener(
-                            'filtered', function ()
-                            {
-                              self.shown = self.queryAllEffectiveChildren('fort-li[filtered]').length > 0;
-                            }
-                          )
-                        }
-                      );
-                    },
-        behaviors:  [Polymer.FortIteratorBehavior]
+        }
       }
     );
   </script>

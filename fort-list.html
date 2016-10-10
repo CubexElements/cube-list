@@ -70,10 +70,6 @@ Example:
         @apply --fort-list-items-container;
       }
 
-      :host .filter paper-input {
-        height: 48px;
-      }
-
       :host {
         --paper-input-container: {
           line-height: 48px;
@@ -81,6 +77,11 @@ Example:
         };
         --paper-input-container-label: {
           line-height: 48px;
+          padding: 0;
+        };
+        --paper-input-container-input: {
+          line-height: 48px;
+          padding: 0;
         };
       }
 
@@ -98,8 +99,8 @@ Example:
     </style>
 
     <div class="filter">
-      <paper-input autofocus$="[[autofocus]]" id="filterinput" label="{{filterLabel}}" no-label-float
-                   on-keyup="filterList">
+      <paper-input autofocus$="[[autofocus]]" id="filterInput" label="{{filterLabel}}" no-label-float
+                   value="{{filterValue}}">
         <iron-icon icon="{{filterIcon}}" prefix></iron-icon>
       </paper-input>
     </div>
@@ -116,14 +117,17 @@ Example:
   <script>
     Polymer(
       {
-        is:         'fort-list',
-        properties: {
+        is:          'fort-list',
+        properties:  {
           filterValue:      {
-            type: String
+            type:     String,
+            notify:   true,
+            observer: '_filterList'
           },
           showFilter:       {
-            type:  Boolean,
-            value: false
+            type:               Boolean,
+            reflectToAttribute: true,
+            value:              false
           },
           filterLabel:      {
             type:  String,
@@ -155,53 +159,70 @@ Example:
             value: "No Results Matching "
           }
         },
-        ready:      function ()
-                    {
-                      var self = this;
-                      this.iterate(
-                        this.querySelectorAll('fort-li'),
-                        function (e)
-                        {
-                          e.addEventListener(
-                            'filtered', function ()
-                            {
-                              self.noResults = self.querySelectorAll('fort-li[filtered]').length == 0;
-                              self.stripe('fort-li[filtered]');
-                            }
-                          );
-                        }
-                      );
-                      this.stripe('fort-li');
-                    },
-        stripe:     function (filter)
-                    {
-                      var i = 0;
-                      this.iterate(
-                        this.querySelectorAll(filter),
-                        function (e)
-                        {
-                          if(i % 2 == 0)
-                          {
-                            e.setAttribute('odd', true);
-                          }
-                          else
-                          {
-                            e.removeAttribute('odd');
-                          }
-                          i++;
-                        }
-                      );
-                    },
-        focus:      function ()
-                    {
-                      this.$.filterinput.focus();
-                    },
-        filterList: function (e)
-                    {
-                      this.filterValue = e.target.value;
-                      this.fire('filter', {value: e.target.value});
-                    },
-        behaviors:  [Polymer.FortIteratorBehavior]
+        ready:       function ()
+                     {
+                       var self = this;
+                       this.iterate(
+                         this.querySelectorAll('fort-li'),
+                         function (e)
+                         {
+                           e.addEventListener(
+                             'fort-li-filtered', function ()
+                             {
+                               self.noResults = self.querySelectorAll('fort-li:not([hidden])').length == 0;
+                             }
+                           );
+                         }
+                       );
+                     },
+        focus:       function ()
+                     {
+                       this.$.filterInput.focus();
+                     },
+        _filterList: function (filterValue)
+                     {
+                       var visibleCount
+                         = this._doFilter(filterValue, this.queryAllEffectiveChildren('fort-li,fort-list-group'), this);
+                       this.noResults = visibleCount == 0;
+                     },
+        _doFilter:   function (filterValue, items, parentNode)
+                     {
+                       var self = this, visibleCount = 0;
+                       this.iterate(
+                         items, function (item)
+                         {
+                           if(item.tagName == 'FORT-LIST-GROUP')
+                           {
+                             var vc = self._doFilter(
+                               filterValue,
+                               item.queryAllEffectiveChildren
+                                 ? item.queryAllEffectiveChildren('fort-li') : item.children,
+                               item
+                             );
+                             item.shown = vc > 0;
+                             visibleCount += vc;
+                           }
+                           else if(item.tagName == 'FORT-LI')
+                           {
+                             item.hidden = filterValue != ""
+                               && (item.getEffectiveTextContent()
+                                       .toLowerCase()
+                                       .indexOf(filterValue.toLowerCase()) == -1);
+
+                             var idx = Array.prototype.indexOf.call(
+                               parentNode.querySelectorAll('fort-li:not([hidden])'),
+                               item
+                             );
+                             item.odd = idx > -1 && (idx % 2 == 0);
+
+                             visibleCount += item.hidden ? 0 : 1;
+                           }
+                         }
+                       );
+                       return visibleCount;
+                     },
+
+        behaviors: [Polymer.FortIteratorBehavior]
       }
     );
   </script>

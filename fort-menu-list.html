@@ -8,10 +8,18 @@
     <style>
       :host {
         display: block;
+        outline: none;
       }
 
       :host ::content fort-li {
         cursor: pointer;
+      }
+
+      /* add specificity to catch shady dom in polyserve */
+      :host ::content fort-li:focus:before,
+      :host ::content fort-li[focused]:before,
+      :host ::content fort-li[focused]:focus:before {
+        background: red;
       }
     </style>
 
@@ -19,13 +27,13 @@
       <fort-list
         zebra$="[[zebra]]"
         border$="[[border]]"
-        double-border$="[[double-border]]"
-        border-group$="[[border-group]]"
-        show-filter$="[[show-filter]]"
-        filter-label$="[[filter-label]]"
-        filter-icon$="[[filter-icon]]"
+        double-border$="[[doubleBorder]]"
+        border-group$="[[borderGroup]]"
+        show-filter$="[[showFilter]]"
+        filter-label$="[[filterLabel]]"
+        filter-icon$="[[filterIcon]]"
         autofocus$="[[autofocus]]"
-        no-results-content$="[[no-results-content]]"
+        no-results-content$="[[noResultsContent]]"
       >
         <content select="fort-li,fort-list-group"></content>
       </fort-list>
@@ -36,7 +44,9 @@
     Polymer(
       {
         is:         'fort-menu-list',
-        properties: {selectable: 'fort-li'},
+        properties: {
+          selectable: {type: String, value: 'fort-li'}
+        },
 
         keyBindings: {
           'enter': '_mutateEnterToTap'

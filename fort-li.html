@@ -25,12 +25,12 @@ Example:
 @demo demo/fort-li.html
 -->
 
-<dom-module id="fort-li" attributes="multi-line filtered">
+<dom-module id="fort-li" attributes="multi-line hidden">
   <template strip-whitespace>
     <style include="paper-item-shared-styles"></style>
     <style>
       :host {
-        display: none;
+        display: block;
         box-sizing: border-box;
 
         @apply --fort-li-style;
@@ -38,16 +38,18 @@ Example:
         @apply --layout-horizontal;
         @apply --layout-center;
         @apply --paper-font-subhead;
+      }
 
-        @apply --paper-item;
+      :host(:focus):before {
+        background: none;
       }
 
       :host(:focus) {
         outline: 0;
       }
 
-      :host([filtered]) {
-        display: block;
+      :host([hidden]) {
+        display: none;
       }
 
       :host fort-icon {
@@ -55,10 +57,6 @@ Example:
         padding: 0;
         overflow: hidden;
         color: var(--text-color);
-      }
-
-      :not(:host-context(fort-menu-list)):host(:focus):before {
-        background-color: transparent;
       }
 
       :host paper-item-body[two-line] {
@@ -150,10 +148,15 @@ Example:
       {
         is:         'fort-li',
         properties: {
-          filtered:   {
+          hidden:     {
             type:               Boolean,
             reflectToAttribute: true,
-            value:              true
+            value:              false
+          },
+          odd:        {
+            type:               Boolean,
+            reflectToAttribute: true,
+            value:              false
           },
           multiLine:  {
             type:  Boolean,
@@ -179,29 +182,9 @@ Example:
                       {
                         this._hasIcon = true;
                       }
-                      var node = this.parentNode;
-                      while(node && node.tagName != "FORT-LIST")
-                      {
-                        node = node.parentNode;
-                      }
+                    },
 
-                      if(node)
-                      {
-                        var self = this;
-                        node.addEventListener(
-                          'filter', function (e)
-                          {
-                            self.filtered = e.detail.value == ""
-                              || self.getEffectiveTextContent()
-                                     .toLowerCase()
-                                     .indexOf(e.detail.value.toLowerCase()) >= 0;
-                            self.fire('filtered', {value: self.filtered});
-                          }
-                        );
-                      }
-                    }
-        ,
-        behaviors:  [
+        behaviors: [
           Polymer.PaperItemBehavior,
           Polymer.FortTextContentBehavior
         ]
