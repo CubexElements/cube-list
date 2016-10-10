@@ -159,22 +159,6 @@ Example:
             value: "No Results Matching "
           }
         },
-        ready:       function ()
-                     {
-                       var self = this;
-                       this.iterate(
-                         this.querySelectorAll('fort-li'),
-                         function (e)
-                         {
-                           e.addEventListener(
-                             'fort-li-filtered', function ()
-                             {
-                               self.noResults = self.querySelectorAll('fort-li:not([hidden])').length == 0;
-                             }
-                           );
-                         }
-                       );
-                     },
         focus:       function ()
                      {
                        this.$.filterInput.focus();
