@@ -18,7 +18,7 @@ Example:
 -->
 
 <dom-module id="fort-list"
-            attributes="zebra border double-border border-group show-filter filter-label filter-icon autofocus no-results-content">
+            attributes="zebra border double-border border-group show-filter filter-label filter-icon autofocus no-results-content custom">
   <template>
     <style>
       :host {
@@ -119,7 +119,12 @@ Example:
           {{noResultsContent}}&nbsp;<q class="filter-value">{{filterValue}}</q>
         </paper-icon-item>
       </div>
-      <content select="fort-li,fort-list-group"></content>
+      <template is="dom-if" if="{{custom}}">
+        <content></content>
+      </template>
+      <template is="dom-if" if="{{!custom}}">
+        <content select="fort-li,fort-list-group"></content>
+      </template>
     </div>
   </template>
 
@@ -157,6 +162,11 @@ Example:
           doubleBorder:     {
             type:  Boolean,
             value: false
+          },
+          custom:           {
+            type:               Boolean,
+            value:              false,
+            reflectToAttribute: true
           },
           noResults:        {
             type:               Boolean,
