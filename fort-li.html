@@ -30,14 +30,14 @@ Example:
     <style include="paper-item-shared-styles"></style>
     <style>
       :host {
+        padding: 0 16px;
         display: block;
         box-sizing: border-box;
+        border: 1px solid transparent;
+        line-height: 26px !important;
 
         @apply --fort-li-style;
-
-        @apply --layout-horizontal;
-        @apply --layout-center;
-        @apply --paper-font-subhead;
+        @apply --paper-font-body1;
       }
 
       :host(:focus):before {
@@ -48,10 +48,6 @@ Example:
         outline: 0;
       }
 
-      :host([hidden]) {
-        display: none;
-      }
-
       :host fort-icon {
         width: var(--paper-item-icon-width, 56px);
         padding: 0;
@@ -59,38 +55,37 @@ Example:
         color: var(--text-color);
       }
 
+      :host paper-item-body {
+        padding: 8px 0;
+      }
+
       :host paper-item-body[two-line] {
         min-height: initial;
       }
 
-      :host paper-item-body ::content div[secondary],
-      :host > ::content div[footer] {
+      :host paper-item-body ::content div.title {
+        @apply --paper-font-subhead;
+      }
+
+      :host paper-item-body ::content div[secondary] {
         @apply --text-secondary;
 
-        display: inline-block;
-        display: -webkit-box;
         white-space: normal;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
+        max-height: 32px;
+        line-height: 16px;
       }
 
       :host > ::content div[footer] {
-        @apply --paper-font-body1;
+        @apply --text-secondary;
         position: relative;
 
-        height: 34px;
-        line-height: 29px;
-
-        -webkit-line-clamp: 1;
-
+        max-height: 40px;
+        line-height: 40px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
         overflow: hidden;
 
         @apply --fort-li-footer;
-      }
-
-      :host([has-sub-text]) {
-        padding-top: 6px;
-        padding-bottom: 6px;
       }
 
       #icon-container {
@@ -101,39 +96,28 @@ Example:
 
       #container {
         display: flex;
-        min-height: 48px;
         width: 100%;
         align-items: center;
       }
     </style>
 
     <div id="container">
-
-      <template is="dom-if" if="{{_hasIcon}}">
+      <template is="dom-if" if="[[_hasIcon]]">
         <div id="icon-container">
           <content select="fort-icon"></content>
         </div>
       </template>
 
-      <template is="dom-if" if="{{hasSubText}}">
-        <template is="dom-if" if="{{multiLine}}">
-          <paper-item-body two-line>
-            <div>{{getInnerText()}}</div>
-            <content select="div[secondary]"></content>
-          </paper-item-body>
-        </template>
-
-        <template is="dom-if" if="{{!multiLine}}">
-          <paper-item-body>
-            <div>{{getInnerText()}}</div>
-            <content select="div[secondary]"></content>
-          </paper-item-body>
-        </template>
+      <template is="dom-if" if="[[_hasSubText]]">
+        <paper-item-body>
+          <div class="title">[[_innerText]]</div>
+          <content select="div[secondary]"></content>
+        </paper-item-body>
       </template>
 
-      <template is="dom-if" if="{{!hasSubText}}">
+      <template is="dom-if" if="[[!_hasSubText]]">
         <paper-item-body>
-          <div>{{getInnerText()}}</div>
+          <div class="title">[[_innerText]]</div>
         </paper-item-body>
       </template>
 
@@ -148,41 +132,31 @@ Example:
       {
         is:         'fort-li',
         properties: {
-          hidden:     {
-            type:               Boolean,
-            reflectToAttribute: true,
-            value:              false
-          },
-          odd:        {
-            type:               Boolean,
-            reflectToAttribute: true,
-            value:              false
-          },
-          multiLine:  {
-            type:  Boolean,
-            value: false
-          },
-          hasSubText: {
-            type:               Boolean,
-            value:              false,
-            reflectToAttribute: true
-          },
-          _hasIcon:   {
-            type:  Boolean,
-            value: false
-          }
+          odd:         {type: Boolean, reflectToAttribute: true, value: false},
+          multiLine:   {type: Boolean, value: false},
+          _innerText:  {type: String},
+          _hasSubText: {type: Boolean, value: false},
+          _hasIcon:    {type: Boolean, value: false}
         },
-        ready:      function ()
+        attached:   function ()
                     {
-                      if(this.queryEffectiveChildren('div[secondary]'))
-                      {
-                        this.hasSubText = true;
-                      }
-                      if(this.queryEffectiveChildren('fort-icon'))
-                      {
-                        this._hasIcon = true;
-                      }
+                      Polymer.RenderStatus.afterNextRender(this, this.__updateProperties.bind(this));
+                      new MutationObserver(this.__updateProperties.bind(this))
+                        .observe(this, {childList: true, subtree: true, characterData: true});
                     },
+
+        __updateProperties: function ()
+                            {
+                              this._innerText = this.getInnerText();
+                              if(this.queryEffectiveChildren('div[secondary]'))
+                              {
+                                this._hasSubText = true;
+                              }
+                              if(this.queryEffectiveChildren('fort-icon'))
+                              {
+                                this._hasIcon = true;
+                              }
+                            },
 
         behaviors: [
           Polymer.PaperItemBehavior,

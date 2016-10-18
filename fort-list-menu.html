@@ -57,7 +57,7 @@
                              e.detail.keyboardEvent.target.fire('tap');
                            },
 
-        // override _activateHandler to prevent it from stopping propagation
+        // override _activateHandler to prevent it from stopping tap event propagation
         _activateHandler: function (event)
                           {
                             Polymer.IronSelectableBehavior._activateHandler.call(this, event);

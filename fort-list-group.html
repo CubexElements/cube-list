@@ -17,16 +17,8 @@ Example:
 <dom-module id="fort-list-group" attributes="title">
   <template>
     <style>
-      :host {
-        display: none;
-      }
-
       :host(:focus) {
         outline: 0;
-      }
-
-      :host([shown]) {
-        display: block;
       }
 
       h2 {
@@ -40,7 +32,7 @@ Example:
       }
     </style>
 
-    <h2>{{title}}</h2>
+    <h2>[[title]]</h2>
     <div class="list-group">
       <content select="fort-li"></content>
     </div>
@@ -50,14 +42,7 @@ Example:
     Polymer(
       {
         is:         'fort-list-group',
-        properties: {
-          title: String,
-          shown: {
-            type:               Boolean,
-            reflectToAttribute: true,
-            value:              true
-          }
-        }
+        properties: {title: String}
       }
     );
   </script>

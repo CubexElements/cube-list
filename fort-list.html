@@ -48,7 +48,7 @@ Example:
 
       :host([border]) ::content fort-li:last-child,
       :host([double-border]) ::content fort-li:last-child {
-        border-bottom: 0;
+        border-bottom-color: transparent;
       }
 
       :host([double-border]) ::content fort-li {
@@ -56,7 +56,7 @@ Example:
       }
 
       :host([double-border]) ::content fort-li:first-of-type {
-        border-top: 0;
+        border-top-color: transparent;
       }
 
       :host [prefix] {
@@ -93,36 +93,24 @@ Example:
           padding: 0;
         };
       }
-
-      :host .no-results {
-        display: none;
-      }
-
-      :host([no-results]) .no-results {
-        display: block;
-      }
-
-      :host .filter-value {
-
-      }
     </style>
 
     <div class="filter">
-      <paper-input autofocus$="[[autofocus]]" id="filterInput" label="{{filterLabel}}" no-label-float
+      <paper-input autofocus$="[[autofocus]]" id="filterInput" label="[[filterLabel]]" no-label-float
                    value="{{filterValue}}">
-        <iron-icon icon="{{filterIcon}}" prefix></iron-icon>
+        <iron-icon icon="[[filterIcon]]" prefix></iron-icon>
       </paper-input>
     </div>
     <div class="items">
-      <div class="no-results">
+      <div hidden="[[!noResults]]">
         <paper-icon-item>
-          {{noResultsContent}}&nbsp;<q class="filter-value">{{filterValue}}</q>
+          [[noResultsContent]]&nbsp;<q class="filter-value">[[filterValue]]</q>
         </paper-icon-item>
       </div>
-      <template is="dom-if" if="{{custom}}">
+      <template is="dom-if" if="[[custom]]">
         <content></content>
       </template>
-      <template is="dom-if" if="{{!custom}}">
+      <template is="dom-if" if="[[!custom]]">
         <content select="fort-li,fort-list-group"></content>
       </template>
     </div>
@@ -168,15 +156,8 @@ Example:
             value:              false,
             reflectToAttribute: true
           },
-          noResults:        {
-            type:               Boolean,
-            value:              false,
-            reflectToAttribute: true
-          },
-          noResultsContent: {
-            type:  String,
-            value: "No Results Matching "
-          }
+          noResults:        {type: Boolean, value: false},
+          noResultsContent: {type: String, value: "No Results Matching"}
         },
         focus:       function ()
                      {
@@ -202,7 +183,7 @@ Example:
                                  ? item.queryAllEffectiveChildren('fort-li') : item.children,
                                item
                              );
-                             item.shown = vc > 0;
+                             item.hidden = vc <= 0;
                              visibleCount += vc;
                            }
                            else if(item.tagName == 'FORT-LI')
