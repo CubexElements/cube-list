@@ -70,6 +70,13 @@
                             Polymer.IronSelectableBehavior._activateHandler.call(this, event);
                           },
 
+        _updateItems: function ()
+                      {
+                        var nodes = Polymer.dom(this).querySelectorAll(this.selectable || '*');
+                        nodes = Array.prototype.filter.call(nodes, this._bindFilterItem);
+                        this._setItems(nodes);
+                      },
+
         behaviors: [
           Polymer.IronMenuBehavior
         ]
