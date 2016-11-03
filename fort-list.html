@@ -1,7 +1,6 @@
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="fort-li.html">
 <link rel="import" href="fort-list-group.html">
-<link rel="import" href="../fort-theme/fort-theme-style.html">
 <link rel="import" href="../paper-input/paper-input.html">
 <link rel="import" href="../iron-icon/iron-icon.html">
 <link rel="import" href="../iron-icons/iron-icons.html">
@@ -18,7 +17,7 @@ Example:
 -->
 
 <dom-module id="fort-list"
-            attributes="zebra border double-border border-group show-filter filter-label filter-icon autofocus no-results-content custom">
+            attributes="zebra border double-border show-filter filter-label filter-icon autofocus no-results-content custom">
   <template>
     <style>
       :host {
@@ -31,32 +30,19 @@ Example:
         -ms-user-select: none; /* Internet Explorer/Edge */
         user-select: none; /* Non-prefixed version, currently not supported by any browser */
 
-        --fort-list-border-color: var(--divider-secondary-color, rgba(0, 0, 0, 0.06));
-        --fort-list-double-border-color: var(--divider-primary-color, rgba(0, 0, 0, 0.12));
-
         @apply --fort-list-style;
-      }
 
-      :host([zebra]) ::content fort-li[odd] {
-        background-color: var(--theme-300-color, #F0F6FA);
-      }
-
-      :host([border]) ::content fort-li,
-      :host([double-border]) ::content fort-li {
-        border-bottom: 1px solid var(--fort-list-border-color);
-      }
-
-      :host([border]) ::content fort-li:last-child,
-      :host([double-border]) ::content fort-li:last-child {
-        border-bottom-color: transparent;
-      }
-
-      :host([double-border]) ::content fort-li {
-        border-top: 1px solid var(--fort-list-double-border-color);
-      }
-
-      :host([double-border]) ::content fort-li:first-of-type {
-        border-top-color: transparent;
+        --paper-input-container: {
+          line-height: 48px;
+        };
+        --paper-input-container-label: {
+          line-height: 48px;
+          padding: 0;
+        };
+        --paper-input-container-input: {
+          line-height: 48px;
+          padding: 0;
+        };
       }
 
       :host [prefix] {
@@ -75,44 +61,26 @@ Example:
         @apply --fort-list-filter;
       }
 
-      :host .items {
+      :host > #itemsContainer {
         @apply --fort-list-items-container;
-      }
-
-      :host {
-        --paper-input-container: {
-          line-height: 48px;
-          padding: 0;
-        };
-        --paper-input-container-label: {
-          line-height: 48px;
-          padding: 0;
-        };
-        --paper-input-container-input: {
-          line-height: 48px;
-          padding: 0;
-        };
       }
     </style>
 
     <div class="filter">
-      <paper-input autofocus$="[[autofocus]]" id="filterInput" label="[[filterLabel]]" no-label-float
+      <paper-input id="filterInput" autofocus$="[[autofocus]]" label="[[filterLabel]]" no-label-float
                    value="{{filterValue}}">
         <iron-icon icon="[[filterIcon]]" prefix></iron-icon>
       </paper-input>
     </div>
-    <div class="items">
+    <div id="itemsContainer">
       <div hidden="[[!noResults]]">
         <paper-icon-item>
           [[noResultsContent]]&nbsp;<q class="filter-value">[[filterValue]]</q>
         </paper-icon-item>
       </div>
-      <template is="dom-if" if="[[custom]]">
-        <content></content>
-      </template>
-      <template is="dom-if" if="[[!custom]]">
-        <content select="fort-li,fort-list-group"></content>
-      </template>
+      <div id="itemsContentContainer">
+        <slot id="items"></slot>
+      </div>
     </div>
   </template>
 
@@ -159,6 +127,10 @@ Example:
           noResults:        {type: Boolean, value: false},
           noResultsContent: {type: String, value: "No Results Matching"}
         },
+        attached:    function ()
+                     {
+                       Polymer.RenderStatus.afterNextRender(this, this._filterList);
+                     },
         focus:       function ()
                      {
                        this.$.filterInput.focus();
@@ -166,10 +138,10 @@ Example:
         _filterList: function (filterValue)
                      {
                        var visibleCount
-                         = this._doFilter(filterValue, this.queryAllEffectiveChildren('fort-li,fort-list-group'), this);
-                       this.noResults = this.showFilter && visibleCount == 0;
+                         = this._doFilter(filterValue || '', this.$.items.assignedNodes({flatten: true}));
+                       this.noResults = filterValue && this.showFilter && visibleCount == 0;
                      },
-        _doFilter:   function (filterValue, items, parentNode)
+        _doFilter:   function (filterValue, items)
                      {
                        var self = this, visibleCount = 0;
                        this.iterate(
@@ -177,29 +149,28 @@ Example:
                          {
                            if(item.tagName == 'FORT-LIST-GROUP')
                            {
-                             var vc = self._doFilter(
-                               filterValue,
-                               item.queryAllEffectiveChildren
-                                 ? item.queryAllEffectiveChildren('fort-li') : item.children,
-                               item
-                             );
+                             var vc = self._doFilter(filterValue, item.children);
                              item.hidden = vc <= 0;
                              visibleCount += vc;
                            }
                            else if(item.tagName == 'FORT-LI')
                            {
-                             item.hidden = filterValue != ""
-                               && (item.getEffectiveTextContent()
-                                       .toLowerCase()
-                                       .indexOf(filterValue.toLowerCase()) == -1);
-
-                             var idx = Array.prototype.indexOf.call(
-                               parentNode.querySelectorAll('fort-li:not([hidden])'),
-                               item
-                             );
-                             item.odd = idx > -1 && (idx % 2 == 0);
-
+                             item.hidden = filterValue
+                               && (item.textContent.toLowerCase().indexOf(filterValue.toLowerCase()) == -1);
                              visibleCount += item.hidden ? 0 : 1;
+                           }
+                         }
+                       );
+                       this.iterate(
+                         items, function (item)
+                         {
+                           if(item.tagName == 'FORT-LI')
+                           {
+                             var all = item.parentNode.querySelectorAll(':scope > fort-li:not([hidden])');
+                             var idx = Array.prototype.indexOf.call(all, item);
+                             item.odd = self.zebra && idx > -1 && (idx % 2 == 0);
+                             item.firstItem = idx == 0;
+                             item.lastItem = idx == all.length - 1;
                            }
                          }
                        );

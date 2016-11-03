@@ -3,7 +3,6 @@
 <link rel="import" href="../paper-item/paper-item-body.html">
 <link rel="import" href="../fort-behavior/fort-text-content-behavior.html">
 <link rel="import" href="../fort-icon/fort-icon.html">
-<link rel="import" href="../fort-theme/fort-theme-style.html">
 <link rel="import" href="../fort-action/fort-action.html">
 <link rel="import" href="../paper-item/paper-item-shared-styles.html">
 <link rel="import" href="../paper-item/paper-item-behavior.html">
@@ -30,22 +29,48 @@ Example:
     <style include="paper-item-shared-styles"></style>
     <style>
       :host {
-        padding: 0 16px;
+        @apply --paper-font-body1;
+        padding: 0;
         display: block;
         box-sizing: border-box;
-        border: 1px solid transparent;
-        line-height: 26px !important;
+        line-height: 26px;
 
         @apply --fort-li-style;
-        @apply --paper-font-body1;
+        @apply --fort-li-border-style;
       }
 
-      :host(:focus):before {
-        background: none;
+      :host:before {
+        background: var(--fort-li-focus-color, currentColor) !important;
       }
 
-      :host(:focus) {
+      :host(:focus), :host([focused]) {
         outline: 0;
+      }
+
+      :host([odd]):host-context(fort-list[zebra],fort-list-menu[zebra]) {
+        background: var(--theme-300-color, #F0F6FA);
+      }
+
+      :host-context(fort-list[border],fort-list-menu[border]) #container,
+      :host-context(fort-list[double-border],fort-list-menu[double-border]) #container {
+        border-bottom: 1px solid var(--fort-list-border-color, rgba(0, 0, 0, 0.06));
+      }
+
+      :host-context(fort-list[border],fort-list-menu[border]):host([last-item]) #container,
+      :host-context(fort-list[double-border],fort-list-menu[double-border]):host([last-item]) #container {
+        border-bottom-color: transparent;
+      }
+
+      :host-context(fort-list[double-border],fort-list-menu[double-border]) #container {
+        border-top: 1px solid var(--fort-list-double-border-color, rgba(0, 0, 0, 0.12));
+      }
+
+      :host-context(fort-list[double-border],fort-list-menu[double-border]):host([first-item]) #container {
+        border-top-color: transparent;
+      }
+
+      :host-context(fort-list-menu) {
+        cursor: pointer;
       }
 
       :host fort-icon {
@@ -63,11 +88,11 @@ Example:
         min-height: initial;
       }
 
-      :host paper-item-body ::content div.title {
+      #primary {
         @apply --paper-font-subhead;
       }
 
-      :host paper-item-body ::content div[secondary] {
+      #secondarySlot::slotted(*) {
         @apply --text-secondary;
 
         white-space: normal;
@@ -75,7 +100,7 @@ Example:
         line-height: 16px;
       }
 
-      :host > ::content div[footer] {
+      #footerSlot::slotted(*) {
         @apply --text-secondary;
         position: relative;
 
@@ -88,7 +113,7 @@ Example:
         @apply --fort-li-footer;
       }
 
-      #icon-container {
+      #iconSlot::slotted(*) {
         display: flex;
         width: 56px;
         align-items: center;
@@ -96,35 +121,26 @@ Example:
 
       #container {
         display: flex;
-        width: 100%;
         align-items: center;
+        padding: 0 16px;
+        border: 1px solid transparent;
       }
     </style>
 
     <div id="container">
-      <template is="dom-if" if="[[_hasIcon]]">
-        <div id="icon-container">
-          <content select="fort-icon"></content>
+      <slot id="iconSlot" name="icon"></slot>
+
+      <paper-item-body>
+        <div id="primary">
+          <slot></slot>
         </div>
-      </template>
+        <slot id="secondarySlot" name="secondary"></slot>
+      </paper-item-body>
 
-      <template is="dom-if" if="[[_hasSubText]]">
-        <paper-item-body>
-          <div class="title">[[_innerText]]</div>
-          <content select="div[secondary]"></content>
-        </paper-item-body>
-      </template>
-
-      <template is="dom-if" if="[[!_hasSubText]]">
-        <paper-item-body>
-          <div class="title">[[_innerText]]</div>
-        </paper-item-body>
-      </template>
-
-      <content select="fort-action"></content>
+      <slot name="actions"></slot>
     </div>
 
-    <content select="div[footer]"></content>
+    <slot id="footerSlot" name="footer"></slot>
   </template>
 
   <script>
@@ -132,31 +148,15 @@ Example:
       {
         is:         'fort-li',
         properties: {
-          odd:         {type: Boolean, reflectToAttribute: true, value: false},
-          multiLine:   {type: Boolean, value: false},
-          _innerText:  {type: String},
-          _hasSubText: {type: Boolean, value: false},
-          _hasIcon:    {type: Boolean, value: false}
+          odd:       {type: Boolean, reflectToAttribute: true, value: false},
+          firstItem: {type: Boolean, reflectToAttribute: true, value: false},
+          lastItem:  {type: Boolean, reflectToAttribute: true, value: false},
+          multiLine: {type: Boolean, value: false}
         },
         attached:   function ()
                     {
-                      Polymer.RenderStatus.afterNextRender(this, this.__updateProperties.bind(this));
-                      new MutationObserver(this.__updateProperties.bind(this))
-                        .observe(this, {childList: true, subtree: true, characterData: true});
-                    },
 
-        __updateProperties: function ()
-                            {
-                              this._innerText = this.getInnerText();
-                              if(this.queryEffectiveChildren('div[secondary]'))
-                              {
-                                this._hasSubText = true;
-                              }
-                              if(this.queryEffectiveChildren('fort-icon'))
-                              {
-                                this._hasIcon = true;
-                              }
-                            },
+                    },
 
         behaviors: [
           Polymer.PaperItemBehavior,

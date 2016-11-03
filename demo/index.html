@@ -4,81 +4,87 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
   <title>fort-list Demo</title>
-  <script src="../../webcomponentsjs/webcomponents-lite.min.js"></script>
+  <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
   <link rel="import" href="../fort-list.html">
   <link rel="import" href="../fort-list-menu.html">
+  <link rel="import" href="../fort-list-group.html">
   <link rel="import" href="../fort-li.html">
-  <link rel="import" href="../../fort-theme/fort-theme.html">
 </head>
 <body unresolved>
 
+<custom-style>
+  <style>
+    html {
+      --fort-li-focus-color: lightgreen !important;
+    }
+  </style>
+</custom-style>
+
 <h2>Grouped Zebra Border List</h2>
-<fort-theme primary="fortifi-navy" accent="fortifi-blue"></fort-theme>
 <fort-list zebra border border-group show-filter>
   <fort-list-group title="The Pigs">
     <fort-li>Daddy Pig
-      <div secondary>Parent</div>
+      <div slot="secondary">Parent</div>
     </fort-li>
     <fort-li>Mummy Pig
-      <div secondary>Parent</div>
+      <div slot="secondary">Parent</div>
     </fort-li>
     <fort-li multi-line>Peppa Pig
-      <div secondary>Child<br>multiline<br>3rd line</div>
+      <div slot="secondary">Child<br>multiline<br>3rd line</div>
     </fort-li>
     <fort-li>George Pig
     </fort-li>
   </fort-list-group>
   <fort-list-group title="The Rabbits">
     <fort-li>Rebecca Rabbit
-      <div secondary>Child</div>
+      <div slot="secondary">Child</div>
     </fort-li>
     <fort-li>Richard Rabbit
-      <div secondary>Child</div>
+      <div slot="secondary">Child</div>
     </fort-li>
     <fort-li>Mr Rabbit
-      <div secondary>Parent</div>
+      <div slot="secondary">Parent</div>
     </fort-li>
     <fort-li>Mrs Rabbit
-      <div secondary>Parent</div>
+      <div slot="secondary">Parent</div>
     </fort-li>
     <fort-li>Miss Rabbit
-      <div secondary>Worker</div>
+      <div slot="secondary">Worker</div>
     </fort-li>
   </fort-list-group>
 </fort-list>
-
 
 <h2>MENU Grouped Zebra Border List</h2>
 <fort-list-menu zebra border border-group show-filter>
   <fort-list-group title="The Pigs">
     <fort-li>Daddy Pig
-      <div secondary>Parent</div>
+      <div slot="secondary">Parent</div>
     </fort-li>
     <fort-li>Mummy Pig
-      <div secondary>Parent</div>
+      <div slot="secondary">Parent</div>
     </fort-li>
     <fort-li>Peppa Pig
-      <div secondary>Child</div>
+      <div slot="secondary">Child</div>
     </fort-li>
     <fort-li>George Pig
-      <div secondary>Child</div>
+      <div slot="secondary">Child</div>
     </fort-li>
   </fort-list-group>
   <fort-list-group title="The Rabbits">
     <fort-li>Rebecca Rabbit
-      <div secondary>Child</div>
+      <div slot="secondary">Child</div>
     </fort-li>
     <fort-li>Richard Rabbit
-      <div secondary>Child</div>
+      <div slot="secondary">Child</div>
     </fort-li>
     <fort-li>Mr Rabbit
-      <div secondary>Parent</div>
+      <div slot="secondary">Parent</div>
     </fort-li>
     <fort-li>Mrs Rabbit
-      <div secondary>Parent</div>
+      <div slot="secondary">Parent</div>
     </fort-li>
     <fort-li disabled>Miss Rabbit
-      <div secondary>Worker</div>
+      <div slot="secondary">Worker</div>
     </fort-li>
   </fort-list-group>
 </fort-list-menu>
@@ -87,16 +93,16 @@
 <h2>Double Border List</h2>
 <fort-list double-border show-filter filter-label="Search Characters">
   <fort-li>Danny Dog
-    <div secondary>Brown</div>
+    <div slot="secondary">Brown</div>
   </fort-li>
   <fort-li>Candy Cat
-    <div secondary>Orange</div>
+    <div slot="secondary">Orange</div>
   </fort-li>
   <fort-li>Suzy Sheep
-    <div secondary>White</div>
+    <div slot="secondary">White</div>
   </fort-li>
   <fort-li>Zoe Zebra
-    <div secondary>Black and White</div>
+    <div slot="secondary">Black and White</div>
   </fort-li>
 </fort-list>
 
