@@ -1,10 +1,6 @@
 <link rel="import" href="../polymer/polymer.html">
-<link rel="import" href="../paper-item/paper-item.html">
 <link rel="import" href="../paper-item/paper-item-body.html">
 <link rel="import" href="../fort-behavior/fort-text-content-behavior.html">
-<link rel="import" href="../fort-icon/fort-icon.html">
-<link rel="import" href="../fort-action/fort-action.html">
-<link rel="import" href="../paper-item/paper-item-shared-styles.html">
 <link rel="import" href="../paper-item/paper-item-behavior.html">
 <link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
 
@@ -26,10 +22,10 @@ Example:
 
 <dom-module id="fort-li" attributes="multi-line">
   <template strip-whitespace>
-    <style include="paper-item-shared-styles"></style>
     <style>
       :host {
         @apply --paper-font-body1;
+        position: relative;
         padding: 0;
         display: block;
         box-sizing: border-box;
@@ -39,8 +35,13 @@ Example:
         @apply --fort-li-border-style;
       }
 
-      :host:before {
-        background: var(--fort-li-focus-color, currentColor) !important;
+      :host-context(fort-list-menu):host(:focus):before,
+      :host-context(fort-list-menu):host([focused]):before {
+        @apply --layout-fit;
+        background: var(--fort-li-focus-color, currentColor);
+        content: '';
+        opacity: var(--dark-divider-opacity);
+        pointer-events: none;
       }
 
       :host(:focus), :host([focused]) {
