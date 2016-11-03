@@ -1,6 +1,5 @@
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../paper-item/paper-item-body.html">
-<link rel="import" href="../fort-behavior/fort-text-content-behavior.html">
 <link rel="import" href="../paper-item/paper-item-behavior.html">
 <link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
 
@@ -154,14 +153,8 @@ Example:
           lastItem:  {type: Boolean, reflectToAttribute: true, value: false},
           multiLine: {type: Boolean, value: false}
         },
-        attached:   function ()
-                    {
-
-                    },
-
-        behaviors: [
-          Polymer.PaperItemBehavior,
-          Polymer.FortTextContentBehavior
+        behaviors:  [
+          Polymer.PaperItemBehavior
         ]
       }
     );
