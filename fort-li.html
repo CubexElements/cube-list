@@ -34,6 +34,10 @@ Example:
         @apply --fort-li-border-style;
       }
 
+      /*
+       * if host-context is deprecated, a shared behavior could be used to propagate list properties
+       * see:  https://github.com/PolymerElements/app-storage/blob/master/app-network-status-behavior.html
+       */
       :host-context(fort-list-menu):host(:focus):before,
       :host-context(fort-list-menu):host([focused]):before {
         @apply --layout-fit;
