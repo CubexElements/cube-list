@@ -80,7 +80,6 @@ Example:
       :host fort-icon {
         width: var(--paper-item-icon-width, 56px);
         padding: 0;
-        overflow: hidden;
         color: var(--text-color);
       }
 
@@ -94,6 +93,11 @@ Example:
 
       #primary {
         @apply --paper-font-subhead;
+        overflow: visible;
+      }
+
+      paper-item-body {
+        overflow: visible;
       }
 
       #secondarySlot::slotted(*) {
