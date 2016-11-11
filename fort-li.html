@@ -127,6 +127,10 @@ Example:
         align-items: center;
       }
 
+      #iconSlot::slotted(fort-icon) {
+        padding: 0;
+      }
+
       #container {
         display: flex;
         align-items: center;
@@ -169,7 +173,7 @@ Example:
         ],
         attached:   function ()
                     {
-                      this._hasIcon = this.$.iconSlot.assignedNodes({flatten: true}).length>0;
+                      this._hasIcon = this.$.iconSlot.assignedNodes({flatten: true}).length > 0;
                     }
       }
     );
