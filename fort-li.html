@@ -121,7 +121,7 @@ Example:
         @apply --fort-li-footer;
       }
 
-      #iconSlot::slotted(*) {
+      #iconContainer[has-contents] {
         display: flex;
         width: 56px;
         align-items: center;
@@ -136,7 +136,9 @@ Example:
     </style>
 
     <div id="container">
-      <slot id="iconSlot" name="icon"></slot>
+      <div id="iconContainer" has-contents$="[[_hasIcon]]">
+        <slot id="iconSlot" name="icon"></slot>
+      </div>
 
       <paper-item-body>
         <div id="primary">
@@ -159,11 +161,16 @@ Example:
           odd:       {type: Boolean, reflectToAttribute: true, value: false},
           firstItem: {type: Boolean, reflectToAttribute: true, value: false},
           lastItem:  {type: Boolean, reflectToAttribute: true, value: false},
-          multiLine: {type: Boolean, value: false}
+          multiLine: {type: Boolean, value: false},
+          _hasIcon:  {type: Boolean}
         },
         behaviors:  [
           Polymer.PaperItemBehavior
-        ]
+        ],
+        attached:   function ()
+                    {
+                      this._hasIcon = this.$.iconSlot.assignedNodes({flatten: true}).length>0;
+                    }
       }
     );
   </script>
