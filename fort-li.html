@@ -36,21 +36,37 @@ Example:
         @apply --fort-li-border-style;
       }
 
+      :host(:focus), :host([focused]) {
+        outline: 0;
+      }
+
       /*
        * if host-context is deprecated, a shared behavior could be used to propagate list properties
        * see:  https://github.com/PolymerElements/app-storage/blob/master/app-network-status-behavior.html
        */
-      :host-context(fort-list-menu):host(:focus):before,
-      :host-context(fort-list-menu):host([focused]):before {
+      :host-context(fort-list-menu):host(:hover):after {
         @apply --layout-fit;
-        background: var(--fort-li-focus-color, currentColor);
+        background: var(--fort-li-hover-color, currentColor);
         content: '';
         opacity: var(--dark-divider-opacity);
         pointer-events: none;
       }
 
-      :host(:focus), :host([focused]) {
-        outline: 0;
+      :host-context(fort-list-menu):host(:focus):before,
+      :host-context(fort-list-menu):host([focused]):before {
+        @apply --layout-fit;
+        background: var(--fort-li-focus-color, transparent);
+        content: '';
+        opacity: var(--dark-divider-opacity);
+        pointer-events: none;
+      }
+
+      :host-context(fort-list-menu):host(:active):after {
+        @apply --layout-fit;
+        background: var(--fort-li-active-color, currentColor);
+        content: '';
+        opacity: var(--dark-divider-opacity);
+        pointer-events: none;
       }
 
       :host([odd]):host-context(fort-list[zebra],fort-list-menu[zebra]) {
