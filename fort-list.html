@@ -60,6 +60,18 @@ Example:
         @apply --fort-list-filter;
       }
 
+      :host #filterInput {
+        --paper-input-container: {
+          line-height: normal;
+        };
+      }
+
+      :host #filterInput > fort-icon {
+        width: var(--paper-item-icon-width, 56px);
+        padding: 0;
+        color: var(--text-color);
+      }
+
       :host > #itemsContainer {
         @apply --fort-list-items-container;
       }
