@@ -108,5 +108,17 @@
   </fort-li>
 </fort-list>
 
+<fort-list double-border show-filter filter-label="Search Characters">
+  <template is="dom-repeat" items='[{"name":"test1"},{"name":"test2"}]'>
+    <fort-li>[[item.name]]</fort-li>
+  </template>
+</fort-list>
+
+<fort-list-menu double-border show-filter filter-label="Search Characters">
+  <template is="dom-repeat" items='[{"name":"test1"},{"name":"test2"}]'>
+    <fort-li>[[item.name]]</fort-li>
+  </template>
+</fort-list-menu>
+
 </body>
 </html>
