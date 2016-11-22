@@ -91,7 +91,7 @@ Example:
           filterValue:      {
             type:     String,
             notify:   true,
-            observer: '_filterList'
+            observer: '_debounceFilter'
           },
           showFilter:       {
             type:               Boolean,
@@ -127,9 +127,15 @@ Example:
           noResultsContent: {type: String, value: "No Results Matching"}
         },
 
+        listeners:       {'dom-change': '_debounceFilter'},
+        _debounceFilter: function ()
+                         {
+                           this.debounce('dom-changed', this._filterList, 50);
+                         },
+
         attached:    function ()
                      {
-                       Polymer.RenderStatus.afterNextRender(this, this._filterList);
+                       Polymer.RenderStatus.afterNextRender(this, this._debounceFilter);
                        this.$.filterInput.addEventListener(
                          'keydown', function (e) { e.stopPropagation(); }
                        )
@@ -138,10 +144,11 @@ Example:
                      {
                        this.$.filterInput.focus();
                      },
-        _filterList: function (filterValue)
+        _filterList: function ()
                      {
-                       var visibleCount
-                         = this._doFilter(filterValue || '', this.$.items.assignedNodes({flatten: true}));
+                       var
+                         filterValue = this.filterValue || '',
+                         visibleCount = this._doFilter(filterValue, this.$.items.assignedNodes({flatten: true}));
                        this.noResults = filterValue && this.showFilter && visibleCount == 0;
                      },
         _doFilter:   function (filterValue, items)
