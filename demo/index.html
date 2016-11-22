@@ -12,113 +12,119 @@
 </head>
 <body unresolved>
 
-<custom-style>
-  <style>
-    html {
-      --fort-li-focus-color: green;
-      --fort-li-hover-color: blue;
-      --fort-li-active-color: red;
-    }
-  </style>
-</custom-style>
+<dom-bind>
+  <template>
 
-<h2>Grouped Zebra Border List</h2>
-<fort-list zebra border border-group show-filter>
-  <fort-list-group title="The Pigs">
-    <fort-li>Daddy Pig
-      <div slot="secondary">Parent</div>
-    </fort-li>
-    <fort-li>Mummy Pig
-      <div slot="secondary">Parent</div>
-    </fort-li>
-    <fort-li multi-line>Peppa Pig
-      <div slot="secondary">Child<br>multiline<br>3rd line</div>
-    </fort-li>
-    <fort-li>George Pig
-    </fort-li>
-  </fort-list-group>
-  <fort-list-group title="The Rabbits">
-    <fort-li>Rebecca Rabbit
-      <div slot="secondary">Child</div>
-    </fort-li>
-    <fort-li>Richard Rabbit
-      <div slot="secondary">Child</div>
-    </fort-li>
-    <fort-li>Mr Rabbit
-      <div slot="secondary">Parent</div>
-    </fort-li>
-    <fort-li>Mrs Rabbit
-      <div slot="secondary">Parent</div>
-    </fort-li>
-    <fort-li>Miss Rabbit
-      <div slot="secondary">Worker</div>
-    </fort-li>
-  </fort-list-group>
-</fort-list>
+    <custom-style>
+      <style>
+        html {
+          --fort-li-focus-color: green;
+          --fort-li-hover-color: blue;
+          --fort-li-active-color: red;
+        }
+      </style>
+    </custom-style>
 
-<h2>MENU Grouped Zebra Border List</h2>
-<fort-list-menu zebra border border-group show-filter>
-  <fort-list-group title="The Pigs">
-    <fort-li>Daddy Pig
-      <div slot="secondary">Parent</div>
-    </fort-li>
-    <fort-li>Mummy Pig
-      <div slot="secondary">Parent</div>
-    </fort-li>
-    <fort-li>Peppa Pig
-      <div slot="secondary">Child</div>
-    </fort-li>
-    <fort-li>George Pig
-      <div slot="secondary">Child</div>
-    </fort-li>
-  </fort-list-group>
-  <fort-list-group title="The Rabbits">
-    <fort-li>Rebecca Rabbit
-      <div slot="secondary">Child</div>
-    </fort-li>
-    <fort-li>Richard Rabbit
-      <div slot="secondary">Child</div>
-    </fort-li>
-    <fort-li>Mr Rabbit
-      <div slot="secondary">Parent</div>
-    </fort-li>
-    <fort-li>Mrs Rabbit
-      <div slot="secondary">Parent</div>
-    </fort-li>
-    <fort-li disabled>Miss Rabbit
-      <div slot="secondary">Worker</div>
-    </fort-li>
-  </fort-list-group>
-</fort-list-menu>
+    <h2>Grouped Zebra Border List</h2>
+    <fort-list zebra border border-group show-filter>
+      <fort-list-group title="The Pigs">
+        <fort-li>Daddy Pig
+          <div slot="secondary">Parent</div>
+        </fort-li>
+        <fort-li>Mummy Pig
+          <div slot="secondary">Parent</div>
+        </fort-li>
+        <fort-li multi-line>Peppa Pig
+          <div slot="secondary">Child<br>multiline<br>3rd line</div>
+        </fort-li>
+        <fort-li>George Pig
+        </fort-li>
+      </fort-list-group>
+      <fort-list-group title="The Rabbits">
+        <fort-li>Rebecca Rabbit
+          <div slot="secondary">Child</div>
+        </fort-li>
+        <fort-li>Richard Rabbit
+          <div slot="secondary">Child</div>
+        </fort-li>
+        <fort-li>Mr Rabbit
+          <div slot="secondary">Parent</div>
+        </fort-li>
+        <fort-li>Mrs Rabbit
+          <div slot="secondary">Parent</div>
+        </fort-li>
+        <fort-li>Miss Rabbit
+          <div slot="secondary">Worker</div>
+        </fort-li>
+      </fort-list-group>
+    </fort-list>
+
+    <h2>MENU Grouped Zebra Border List</h2>
+    <fort-list-menu zebra border border-group show-filter>
+      <fort-list-group title="The Pigs">
+        <fort-li>Daddy Pig
+          <div slot="secondary">Parent</div>
+        </fort-li>
+        <fort-li>Mummy Pig
+          <div slot="secondary">Parent</div>
+        </fort-li>
+        <fort-li>Peppa Pig
+          <div slot="secondary">Child</div>
+        </fort-li>
+        <fort-li>George Pig
+          <div slot="secondary">Child</div>
+        </fort-li>
+      </fort-list-group>
+      <fort-list-group title="The Rabbits">
+        <fort-li>Rebecca Rabbit
+          <div slot="secondary">Child</div>
+        </fort-li>
+        <fort-li>Richard Rabbit
+          <div slot="secondary">Child</div>
+        </fort-li>
+        <fort-li>Mr Rabbit
+          <div slot="secondary">Parent</div>
+        </fort-li>
+        <fort-li>Mrs Rabbit
+          <div slot="secondary">Parent</div>
+        </fort-li>
+        <fort-li disabled>Miss Rabbit
+          <div slot="secondary">Worker</div>
+        </fort-li>
+      </fort-list-group>
+    </fort-list-menu>
 
 
-<h2>Double Border List</h2>
-<fort-list double-border show-filter filter-label="Search Characters">
-  <fort-li>Danny Dog
-    <div slot="secondary">Brown</div>
-  </fort-li>
-  <fort-li>Candy Cat
-    <div slot="secondary">Orange</div>
-  </fort-li>
-  <fort-li>Suzy Sheep
-    <div slot="secondary">White</div>
-  </fort-li>
-  <fort-li>Zoe Zebra
-    <div slot="secondary">Black and White</div>
-  </fort-li>
-</fort-list>
+    <h2>Double Border List</h2>
+    <fort-list double-border show-filter filter-label="Search Characters">
+      <fort-li>Danny Dog
+        <div slot="secondary">Brown</div>
+      </fort-li>
+      <fort-li>Candy Cat
+        <div slot="secondary">Orange</div>
+      </fort-li>
+      <fort-li>Suzy Sheep
+        <div slot="secondary">White</div>
+      </fort-li>
+      <fort-li>Zoe Zebra
+        <div slot="secondary">Black and White</div>
+      </fort-li>
+    </fort-list>
 
-<fort-list double-border show-filter filter-label="Search Characters">
-  <template is="dom-repeat" items='[{"name":"test1"},{"name":"test2"}]'>
-    <fort-li>[[item.name]]</fort-li>
+    <fort-list zebra double-border show-filter filter-label="Search Characters">
+      <template is="dom-repeat" items='[{"name":"test1"},{"name":"test2"}]'>
+        <fort-li>[[item.name]]</fort-li>
+      </template>
+    </fort-list>
+
+    <fort-list-menu zebra double-border show-filter filter-label="Search Characters">
+      <template is="dom-repeat" items='[{"name":"test1"},{"name":"test2"}]'>
+        <fort-li>[[item.name]]</fort-li>
+      </template>
+    </fort-list-menu>
+
   </template>
-</fort-list>
-
-<fort-list-menu double-border show-filter filter-label="Search Characters">
-  <template is="dom-repeat" items='[{"name":"test1"},{"name":"test2"}]'>
-    <fort-li>[[item.name]]</fort-li>
-  </template>
-</fort-list-menu>
+</dom-bind>
 
 </body>
 </html>
