@@ -2,7 +2,7 @@
 <link rel="import" href="fort-li.html">
 <link rel="import" href="fort-list-group.html">
 <link rel="import" href="../paper-input/paper-input.html">
-<link rel="import" href="../iron-icon/iron-icon.html">
+<link rel="import" href="../fort-icon/fort-icon.html">
 <link rel="import" href="../fort-behavior/fort-iterator-behavior.html">
 
 <!--
@@ -68,7 +68,7 @@ Example:
     <div class="filter">
       <paper-input id="filterInput" autofocus$="[[autofocus]]" label="[[filterLabel]]" no-label-float
                    value="{{filterValue}}">
-        <iron-icon icon="[[filterIcon]]" prefix></iron-icon>
+        <fort-icon icon="[[filterIcon]]" slot="prefix"></fort-icon>
       </paper-input>
     </div>
     <div id="itemsContainer">
