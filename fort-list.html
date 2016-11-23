@@ -155,6 +155,11 @@ Example:
                      },
         _doFilter:   function (filterValue, items)
                      {
+                       items = Array.prototype.filter.call(
+                         items,
+                         function (a) {return a.nodeType === Node.ELEMENT_NODE}
+                       );
+
                        var self = this, visibleCount = 0;
                        this.iterate(
                          items, function (item)
@@ -165,24 +170,35 @@ Example:
                              item.hidden = vc <= 0;
                              visibleCount += vc;
                            }
-                           else if(item.tagName == 'FORT-LI')
+                           else
                            {
-                             item.hidden = filterValue
-                               && (item.textContent.toLowerCase().indexOf(filterValue.toLowerCase()) == -1);
+                             var noListItem = item.tagName !== 'FORT-LI' && (!item.querySelector('FORT-LI'));
+                             item.hidden = noListItem
+                               || (filterValue && (item.textContent.toLowerCase()
+                                                       .indexOf(filterValue.toLowerCase()) == -1));
                              visibleCount += item.hidden ? 0 : 1;
                            }
                          }
                        );
+
+                       var visible = Array.prototype.filter.call(
+                         items,
+                         function (a) {return (!a.hasAttribute('hidden')) && a.tagName != 'FORT-LIST-GROUP'}
+                       );
                        this.iterate(
-                         items, function (item)
+                         visible, function (item)
                          {
-                           if(item.tagName == 'FORT-LI')
+                           var idx = Array.prototype.indexOf.call(visible, item);
+                           var li = item;
+                           if(li.tagName !== 'FORT-LI')
                            {
-                             var all = item.parentNode.querySelectorAll(':scope > fort-li:not([hidden])');
-                             var idx = Array.prototype.indexOf.call(all, item);
-                             item.odd = self.zebra && idx > -1 && (idx % 2 == 0);
-                             item.firstItem = idx == 0;
-                             item.lastItem = idx == all.length - 1;
+                             li = li.querySelector('fort-li');
+                           }
+                           if(li)
+                           {
+                             li.odd = self.zebra && idx > -1 && (idx % 2 == 0);
+                             li.firstItem = idx == 0;
+                             li.lastItem = idx == visible.length - 1;
                            }
                          }
                        );
