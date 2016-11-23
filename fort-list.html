@@ -32,15 +32,16 @@ Example:
         @apply --fort-list-style;
 
         --paper-input-container: {
-          line-height: 48px;
+          padding: 0;
+          height: 48px;
         };
         --paper-input-container-label: {
-          line-height: 48px;
           padding: 0;
+          line-height: 48px;
         };
         --paper-input-container-input: {
-          line-height: 48px;
           padding: 0;
+          line-height: 48px;
         };
       }
 
@@ -49,27 +50,18 @@ Example:
         margin-right: 32px;
       }
 
+      :host .filter {
+        @apply --fort-list-filter;
+        display: none;
+      }
+
       :host([show-filter]) .filter {
         display: block;
-      }
-
-      :host .filter {
-        display: none;
-        @apply --text-secondary;
-        @apply --paper-font-body2;
-        @apply --fort-list-filter;
-      }
-
-      :host #filterInput {
-        --paper-input-container: {
-          line-height: normal;
-        };
       }
 
       :host #filterInput > fort-icon {
         width: var(--paper-item-icon-width, 56px);
         padding: 0;
-        color: var(--text-color);
       }
 
       :host > #itemsContainer {
@@ -84,11 +76,9 @@ Example:
       </paper-input>
     </div>
     <div id="itemsContainer">
-      <div hidden="[[!noResults]]">
-        <paper-icon-item>
-          [[noResultsContent]]&nbsp;<q class="filter-value">[[filterValue]]</q>
-        </paper-icon-item>
-      </div>
+      <fort-li hidden="[[!noResults]]">
+        [[noResultsContent]]&nbsp;<q class="filter-value">[[filterValue]]</q>
+      </fort-li>
       <div id="itemsContentContainer">
         <slot id="items"></slot>
       </div>
