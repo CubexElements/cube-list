@@ -16,7 +16,7 @@ Example:
 -->
 
 <dom-module id="fort-list"
-            attributes="zebra border double-border show-filter filter-label filter-icon autofocus no-results-content custom">
+            attributes="zebra border double-border border-group show-filter filter-label filter-icon autofocus no-results-content custom">
   <template>
     <style>
       :host {
@@ -115,6 +115,11 @@ Example:
           border:           {
             type:  Boolean,
             value: false
+          },
+          borderGroup:      {
+            type:               Boolean,
+            value:              false,
+            reflectToAttribute: true
           },
           doubleBorder:     {
             type:  Boolean,
