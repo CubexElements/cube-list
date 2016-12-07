@@ -51,6 +51,10 @@
     "paper-ripple": "2.0-preview",
     "iron-selector": "2.0-preview",
     "neon-animation": "2.0-preview",
-    "iron-resizable-behavior": "2.0-preview"
+    "iron-resizable-behavior": "2.0-preview",
+    "iron-ajax": "2.0-preview",
+    "iron-fit-behavior": "2.0-preview",
+    "iron-dropdown": "2.0-preview",
+    "iron-overlay-behavior": "2.0-preview"
   }
 }
