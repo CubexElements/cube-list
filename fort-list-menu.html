@@ -3,7 +3,7 @@
 <link rel="import" href="../iron-menu-behavior/iron-menu-behavior.html">
 
 <dom-module id="fort-list-menu"
-            attributes="zebra border double-border border-group show-filter filter-label filter-icon autofocus no-results-content">
+            attributes="zebra border double-border border-group show-filter filter-value filter-label filter-icon autofocus no-results-content">
   <template strip-whitespace>
     <style>
       :host {
@@ -15,7 +15,7 @@
     <div class="selectable-content">
       <fort-list zebra="[[zebra]]" border="[[border]]" border-group="[[borderGroup]]" double-border="[[doubleBorder]]"
                  show-filter="[[showFilter]]" filter-label="[[filterLabel]]" filter-icon="[[filterIcon]]"
-                 autofocus="[[autofocus]]" no-results-content="[[noResultsContent]]">
+                 autofocus="[[autofocus]]" no-results-content="[[noResultsContent]]" filter-value="{{filterValue}}">
         <slot></slot>
       </fort-list>
     </div>
@@ -31,6 +31,10 @@
             type:               Boolean,
             reflectToAttribute: true,
             value:              false
+          },
+          filterValue:      {
+            type:               String,
+            reflectToAttribute: true
           },
           filterLabel:      {
             type:  String,

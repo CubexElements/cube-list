@@ -16,7 +16,7 @@ Example:
 -->
 
 <dom-module id="fort-list"
-            attributes="zebra border double-border border-group show-filter filter-label filter-icon autofocus no-results-content custom">
+            attributes="zebra border double-border border-group show-filter filter-value filter-label filter-icon autofocus no-results-content custom">
   <template>
     <style>
       :host {
@@ -159,7 +159,7 @@ Example:
                        var
                          filterValue = this.filterValue || '',
                          visibleCount = this._doFilter(filterValue, this.$.items.assignedNodes({flatten: true}));
-                       this.noResults = filterValue && this.showFilter && visibleCount == 0;
+                       this.noResults = filterValue && visibleCount == 0;
                      },
         _doFilter:   function (filterValue, items)
                      {
