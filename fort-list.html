@@ -204,7 +204,7 @@ Example:
                            }
                            if(li)
                            {
-                             li.odd = self.zebra && idx > -1 && (idx % 2 == 0);
+                             li.odd = self.zebra && idx > -1 && (idx % 2 !== 0);
                              li.firstItem = idx == 0;
                              li.lastItem = idx == visible.length - 1;
                            }
