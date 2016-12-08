@@ -190,7 +190,17 @@ Example:
           lastItem:  {type: Boolean, reflectToAttribute: true, value: false},
           multiLine: {type: Boolean, value: false}
         },
-        behaviors:  [
+
+        /**
+         * Override to stop space key from triggering a click
+         */
+        _spaceKeyDownHandler: function () {},
+        /**
+         * Override to stop space key from triggering a click
+         */
+        _spaceKeyUpHandler:   function () {},
+
+        behaviors: [
           Polymer.PaperItemBehavior
         ]
       }
