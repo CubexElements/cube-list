@@ -30,7 +30,6 @@ Example:
         box-sizing: border-box;
         line-height: 26px;
         min-height: 48px;
-        user-select: none;
 
         @apply --fort-li-style;
         @apply --fort-li-border-style;
@@ -97,6 +96,12 @@ Example:
 
       :host-context(fort-list-menu) {
         cursor: pointer;
+        -webkit-touch-callout: none; /* iOS Safari */
+        -webkit-user-select: none; /* Chrome/Safari/Opera */
+        -khtml-user-select: none; /* Konqueror */
+        -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+        user-select: none; /* Non-prefixed version, currently not supported by any browser */
       }
 
       :host fort-icon {
