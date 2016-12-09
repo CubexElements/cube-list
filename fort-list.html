@@ -16,7 +16,7 @@ Example:
 -->
 
 <dom-module id="fort-list"
-            attributes="zebra border double-border border-group show-filter filter-value filter-label filter-icon autofocus no-results-content custom">
+            attributes="zebra border double-border border-group show-filter filter-value filter-label filter-icon autofocus no-results-content custom bottom-border">
   <template>
     <style>
       :host {
@@ -74,6 +74,10 @@ Example:
         display: block;
       }
 
+      :host([bottom-border]) {
+        border-bottom: 1px solid var(--fort-list-border-color, rgba(0, 0, 0, 0.06));
+      }
+
       :host #filterInput > fort-icon {
         width: var(--paper-item-icon-width, 56px);
         padding: 0;
@@ -129,6 +133,11 @@ Example:
             reflectToAttribute: true
           },
           border:           {
+            type:               Boolean,
+            value:              false,
+            reflectToAttribute: true
+          },
+          borderBottom:     {
             type:               Boolean,
             value:              false,
             reflectToAttribute: true
