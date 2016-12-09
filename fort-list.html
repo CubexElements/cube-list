@@ -55,6 +55,21 @@ Example:
         display: none;
       }
 
+      :host paper-input {
+        color: var(--fort-list-filter-color);
+        --primary-color: var(--fort-list-filter-color);
+        --primary-text-color: var(--fort-list-filter-color);
+        --secondary-text-color: var(--fort-list-filter-color);
+      }
+
+      :host paper-input:focus,
+      :host paper-input[focused] {
+        color: var(--fort-list-filter-focus-color);
+        --primary-color: var(--fort-list-filter-focus-color);
+        --primary-text-color: var(--fort-list-filter-focus-color);
+        --secondary-text-color: var(--fort-list-filter-focus-color);
+      }
+
       :host([show-filter]) .filter {
         display: block;
       }
