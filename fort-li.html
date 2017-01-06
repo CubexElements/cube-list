@@ -76,18 +76,18 @@ Example:
         background: var(--theme-300-color, #F0F6FA);
       }
 
-      :host-context(fort-list[border],fort-list-menu[border]) #container,
-      :host-context(fort-list[double-border],fort-list-menu[double-border]) #container {
+      :host-context(fort-list[border],fort-list-menu[border]),
+      :host-context(fort-list[double-border],fort-list-menu[double-border]) {
         border-bottom: 1px solid var(--fort-list-border-color, rgba(0, 0, 0, 0.06));
       }
 
-      :host-context(fort-list[border],fort-list-menu[border]):host([last-item]) #container,
-      :host-context(fort-list[double-border],fort-list-menu[double-border]):host([last-item]) #container {
+      :host-context(fort-list[border],fort-list-menu[border]):host([last-item]),
+      :host-context(fort-list[double-border],fort-list-menu[double-border]):host([last-item]) {
         border-bottom-color: transparent;
       }
 
-      :host-context(fort-list[double-border],fort-list-menu[double-border]) #container {
-        border-top: 1px solid var(--fort-list-double-border-color, rgba(0, 0, 0, 0.12));
+      :host-context(fort-list[double-border],fort-list-menu[double-border]) {
+        border-top: 1px solid var(--fort-list-double-border-color, rgba(255, 255, 255, 1));
       }
 
       :host-context(fort-list-menu) {
@@ -161,24 +161,30 @@ Example:
         min-height: inherit;
         box-sizing: border-box;
       }
+
+      #wrapper {
+        @apply --fort-li-content-style;
+      }
     </style>
 
-    <div id="container">
-      <div id="iconContainer">
-        <slot id="iconSlot" name="icon"></slot>
+    <div id="wrapper">
+      <div id="container">
+        <div id="iconContainer">
+          <slot id="iconSlot" name="icon"></slot>
+        </div>
+
+        <paper-item-body>
+          <div id="primary">
+            <slot></slot>
+          </div>
+          <slot id="secondarySlot" name="secondary"></slot>
+        </paper-item-body>
+
+        <slot name="actions"></slot>
       </div>
 
-      <paper-item-body>
-        <div id="primary">
-          <slot></slot>
-        </div>
-        <slot id="secondarySlot" name="secondary"></slot>
-      </paper-item-body>
-
-      <slot name="actions"></slot>
+      <slot id="footerSlot" name="footer"></slot>
     </div>
-
-    <slot id="footerSlot" name="footer"></slot>
   </template>
 
   <script>
