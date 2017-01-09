@@ -14,7 +14,7 @@ Example:
 -->
 
 <dom-module id="fort-list-group" attributes="title">
-  <template>
+  <template strip-whitespace>
     <style>
       :host(:focus) {
         outline: 0;
@@ -27,11 +27,13 @@ Example:
       }
 
       :host-context([border-group]) .list-group {
-        border: 1px solid var(--fort-list-border-color,rgba(0, 0, 0, 0.12));
+        border: 1px solid var(--fort-list-border-color, rgba(0, 0, 0, 0.12));
       }
     </style>
 
-    <h2>[[title]]</h2>
+    <h2>[[title]]
+      <slot name="title"></slot>
+    </h2>
     <div class="list-group">
       <slot></slot>
     </div>
