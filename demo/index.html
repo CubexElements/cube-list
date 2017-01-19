@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
-  <title>fort-list Demo</title>
+  <title>cube-list Demo</title>
   <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
-  <link rel="import" href="../fort-list.html">
-  <link rel="import" href="../fort-list-menu.html">
-  <link rel="import" href="../fort-list-group.html">
-  <link rel="import" href="../fort-li.html">
+  <link rel="import" href="../cube-list.html">
+  <link rel="import" href="../cube-list-menu.html">
+  <link rel="import" href="../cube-list-group.html">
+  <link rel="import" href="../cube-li.html">
 </head>
 <body unresolved>
 
@@ -18,113 +18,113 @@
     <custom-style>
       <style>
         html {
-          --fort-li-focus-color: green;
-          --fort-li-hover-color: blue;
-          --fort-li-active-color: red;
+          --cube-li-focus-color: green;
+          --cube-li-hover-color: blue;
+          --cube-li-active-color: red;
         }
       </style>
     </custom-style>
 
     <h2>Grouped Zebra Border List</h2>
-    <fort-list zebra border border-group show-filter>
-      <fort-list-group title="The Pigs">
-        <fort-li>Daddy Pig
+    <cube-list zebra border border-group show-filter>
+      <cube-list-group title="The Pigs">
+        <cube-li>Daddy Pig
           <div slot="secondary">Parent</div>
-        </fort-li>
+        </cube-li>
         <a href="#mummy">
-          <fort-li>Mummy Pig
+          <cube-li>Mummy Pig
             <div slot="secondary">Parent</div>
-          </fort-li>
+          </cube-li>
         </a>
-        <div>invalid item due to no fort-li</div>
-        <fort-li multi-line>Peppa Pig
+        <div>invalid item due to no cube-li</div>
+        <cube-li multi-line>Peppa Pig
           <a href="#peppa" slot="secondary">Child<br>multiline<br>3rd line</a>
-        </fort-li>
-        <fort-li>George Pig
-        </fort-li>
-      </fort-list-group>
-      <fort-list-group title="The Rabbits">
-        <fort-li>Rebecca Rabbit
+        </cube-li>
+        <cube-li>George Pig
+        </cube-li>
+      </cube-list-group>
+      <cube-list-group title="The Rabbits">
+        <cube-li>Rebecca Rabbit
           <div slot="secondary">Child</div>
-        </fort-li>
-        <fort-li>Richard Rabbit
+        </cube-li>
+        <cube-li>Richard Rabbit
           <div slot="secondary">Child</div>
-        </fort-li>
-        <fort-li>Mr Rabbit
+        </cube-li>
+        <cube-li>Mr Rabbit
           <div slot="secondary">Parent</div>
-        </fort-li>
-        <fort-li>Mrs Rabbit
+        </cube-li>
+        <cube-li>Mrs Rabbit
           <div slot="secondary">Parent</div>
-        </fort-li>
-        <fort-li>Miss Rabbit
+        </cube-li>
+        <cube-li>Miss Rabbit
           <div slot="secondary">Worker</div>
-        </fort-li>
-      </fort-list-group>
-    </fort-list>
+        </cube-li>
+      </cube-list-group>
+    </cube-list>
 
     <h2>MENU Grouped Zebra Border List</h2>
-    <fort-list-menu zebra border border-group show-filter>
-      <fort-list-group title="The Pigs">
-        <fort-li>Daddy Pig
+    <cube-list-menu zebra border border-group show-filter>
+      <cube-list-group title="The Pigs">
+        <cube-li>Daddy Pig
           <div slot="secondary">Parent</div>
-        </fort-li>
-        <fort-li>Mummy Pig
+        </cube-li>
+        <cube-li>Mummy Pig
           <div slot="secondary">Parent</div>
-        </fort-li>
-        <fort-li>Peppa Pig
+        </cube-li>
+        <cube-li>Peppa Pig
           <div slot="secondary">Child</div>
-        </fort-li>
-        <fort-li>George Pig
+        </cube-li>
+        <cube-li>George Pig
           <div slot="secondary">Child</div>
-        </fort-li>
-      </fort-list-group>
-      <fort-list-group title="The Rabbits">
-        <fort-li>Rebecca Rabbit
+        </cube-li>
+      </cube-list-group>
+      <cube-list-group title="The Rabbits">
+        <cube-li>Rebecca Rabbit
           <div slot="secondary">Child</div>
-        </fort-li>
-        <fort-li>Richard Rabbit
+        </cube-li>
+        <cube-li>Richard Rabbit
           <div slot="secondary">Child</div>
-        </fort-li>
-        <fort-li>Mr Rabbit
+        </cube-li>
+        <cube-li>Mr Rabbit
           <div slot="secondary">Parent</div>
-        </fort-li>
-        <fort-li>Mrs Rabbit
+        </cube-li>
+        <cube-li>Mrs Rabbit
           <div slot="secondary">Parent</div>
-        </fort-li>
-        <fort-li disabled>Miss Rabbit
+        </cube-li>
+        <cube-li disabled>Miss Rabbit
           <div slot="secondary">Worker</div>
-        </fort-li>
-      </fort-list-group>
-    </fort-list-menu>
+        </cube-li>
+      </cube-list-group>
+    </cube-list-menu>
 
 
     <h2>Double Border List</h2>
-    <fort-list double-border show-filter filter-label="Search Characters">
-      <fort-li>Danny Dog
+    <cube-list double-border show-filter filter-label="Search Characters">
+      <cube-li>Danny Dog
         <div slot="secondary">Brown</div>
-      </fort-li>
-      <fort-li>Candy Cat
+      </cube-li>
+      <cube-li>Candy Cat
         <div slot="secondary">Orange</div>
-      </fort-li>
-      <fort-li>Suzy Sheep
+      </cube-li>
+      <cube-li>Suzy Sheep
         <div slot="secondary">White</div>
-      </fort-li>
-      <fort-li>Zoe Zebra
+      </cube-li>
+      <cube-li>Zoe Zebra
         <div slot="secondary">Black and White</div>
-      </fort-li>
-    </fort-list>
+      </cube-li>
+    </cube-list>
 
-    <fort-list zebra double-border show-filter filter-label="Search Characters">
+    <cube-list zebra double-border show-filter filter-label="Search Characters">
       <template is="dom-repeat" items='[{"name":"test1"},{"name":"test2"}]'>
-        <fort-li>[[item.name]]</fort-li>
+        <cube-li>[[item.name]]</cube-li>
       </template>
-    </fort-list>
+    </cube-list>
 
-    <fort-list-menu zebra double-border show-filter filter-label="Search Characters">
+    <cube-list-menu zebra double-border show-filter filter-label="Search Characters">
       <template is="dom-repeat" items='[{"name":"test1"},{"name":"test2"}]'>
-        <fort-li>[[item.name]]</fort-li>
+        <cube-li>[[item.name]]</cube-li>
       </template>
-    </fort-list-menu>
+    </cube-list-menu>
 
   </template>
 </dom-bind>

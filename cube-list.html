@@ -1,28 +1,28 @@
 <link rel="import" href="../polymer/polymer.html">
-<link rel="import" href="fort-li.html">
-<link rel="import" href="fort-list-group.html">
+<link rel="import" href="cube-li.html">
+<link rel="import" href="cube-list-group.html">
 <link rel="import" href="../paper-input/paper-input.html">
-<link rel="import" href="../fort-icon/fort-icon.html">
-<link rel="import" href="../fort-behavior/fort-iterator-behavior.html">
+<link rel="import" href="../cube-icon/cube-icon.html">
+<link rel="import" href="../cube-behavior/cube-iterator-behavior.html">
 
 <!--
 A List
 
 Example:
 
-    <forti-list></fort-list>
+    <cubei-list></cube-list>
 
 @demo demo/index.html
 -->
 
-<dom-module id="fort-list"
+<dom-module id="cube-list"
             attributes="zebra border double-border border-group show-filter filter-value filter-label filter-icon autofocus no-results-content custom bottom-border">
   <template>
     <style>
       :host {
         display: block;
 
-        @apply --fort-list-style;
+        @apply --cube-list-style;
 
         --paper-input-container: {
           padding: 0;
@@ -44,23 +44,23 @@ Example:
       }
 
       :host .filter {
-        @apply --fort-list-filter;
+        @apply --cube-list-filter;
         display: none;
       }
 
       :host paper-input {
-        color: var(--fort-list-filter-color);
-        --primary-color: var(--fort-list-filter-color);
-        --primary-text-color: var(--fort-list-filter-color);
-        --secondary-text-color: var(--fort-list-filter-color);
+        color: var(--cube-list-filter-color);
+        --primary-color: var(--cube-list-filter-color);
+        --primary-text-color: var(--cube-list-filter-color);
+        --secondary-text-color: var(--cube-list-filter-color);
       }
 
       :host paper-input:focus,
       :host paper-input[focused] {
-        color: var(--fort-list-filter-focus-color);
-        --primary-color: var(--fort-list-filter-focus-color);
-        --primary-text-color: var(--fort-list-filter-focus-color);
-        --secondary-text-color: var(--fort-list-filter-focus-color);
+        color: var(--cube-list-filter-focus-color);
+        --primary-color: var(--cube-list-filter-focus-color);
+        --primary-text-color: var(--cube-list-filter-focus-color);
+        --secondary-text-color: var(--cube-list-filter-focus-color);
       }
 
       :host([show-filter]) .filter {
@@ -68,29 +68,29 @@ Example:
       }
 
       :host([bottom-border]) {
-        border-bottom: 1px solid var(--fort-list-border-color, rgba(0, 0, 0, 0.06));
+        border-bottom: 1px solid var(--cube-list-border-color, rgba(0, 0, 0, 0.06));
       }
 
-      :host #filterInput > fort-icon {
+      :host #filterInput > cube-icon {
         width: var(--paper-item-icon-width, 56px);
         padding: 0;
       }
 
       :host > #itemsContainer {
-        @apply --fort-list-items-container;
+        @apply --cube-list-items-container;
       }
     </style>
 
     <div class="filter">
       <paper-input id="filterInput" autofocus$="[[autofocus]]" label="[[filterLabel]]" no-label-float
                    value="{{filterValue}}">
-        <fort-icon icon="[[filterIcon]]" slot="prefix"></fort-icon>
+        <cube-icon icon="[[filterIcon]]" slot="prefix"></cube-icon>
       </paper-input>
     </div>
     <div id="itemsContainer">
-      <fort-li hidden="[[!noResults]]">
+      <cube-li hidden="[[!noResults]]">
         [[noResultsContent]]&nbsp;<q class="filter-value">[[filterValue]]</q>
-      </fort-li>
+      </cube-li>
       <div id="itemsContentContainer">
         <slot id="items"></slot>
       </div>
@@ -100,7 +100,7 @@ Example:
   <script>
     Polymer(
       {
-        is:         'fort-list',
+        is:         'cube-list',
         properties: {
           filterValue:      {
             type:     String,
@@ -189,7 +189,7 @@ Example:
                        this.iterate(
                          items, function (item)
                          {
-                           if(item.tagName == 'FORT-LIST-GROUP')
+                           if(item.tagName == 'CUBE-LIST-GROUP')
                            {
                              var vc = self._doFilter(filterValue, item.children);
                              item.hidden = vc <= 0;
@@ -197,7 +197,7 @@ Example:
                            }
                            else
                            {
-                             var noListItem = item.tagName !== 'FORT-LI' && (!item.querySelector('FORT-LI'));
+                             var noListItem = item.tagName !== 'CUBE-LI' && (!item.querySelector('CUBE-LI'));
                              item.hidden = noListItem
                                || (filterValue && (item.textContent.toLowerCase()
                                                        .indexOf(filterValue.toLowerCase()) == -1));
@@ -208,16 +208,16 @@ Example:
 
                        var visible = Array.prototype.filter.call(
                          items,
-                         function (a) {return (!a.hasAttribute('hidden')) && a.tagName != 'FORT-LIST-GROUP'}
+                         function (a) {return (!a.hasAttribute('hidden')) && a.tagName != 'CUBE-LIST-GROUP'}
                        );
                        this.iterate(
                          visible, function (item)
                          {
                            var idx = Array.prototype.indexOf.call(visible, item);
                            var li = item;
-                           if(li.tagName !== 'FORT-LI')
+                           if(li.tagName !== 'CUBE-LI')
                            {
-                             li = li.querySelector('fort-li');
+                             li = li.querySelector('cube-li');
                            }
                            if(li)
                            {
@@ -230,7 +230,7 @@ Example:
                        return visibleCount;
                      },
 
-        behaviors: [Polymer.FortIteratorBehavior]
+        behaviors: [Polymer.CubeIteratorBehavior]
       }
     );
   </script>

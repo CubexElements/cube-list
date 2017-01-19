@@ -1,5 +1,5 @@
 {
-  "name": "fort-list",
+  "name": "cube-list",
   "version": "1.0.0",
   "authors": [
     "Anonymous <anonymous@example.com>"
@@ -11,9 +11,9 @@
     "seed"
   ],
   "private": true,
-  "main": "fort-list.html",
+  "main": "cube-list.html",
   "license": "MIT",
-  "homepage": "https://github.com/FortifiElements/fort-list/",
+  "homepage": "https://github.com/CubexElements/cube-list/",
   "ignore": [
     "/.*",
     "/test/",
@@ -22,8 +22,8 @@
   ],
   "dependencies": {
     "polymer": "Polymer/polymer#2.0-preview",
-    "fort-elements": "git@github.com:FortifiElements/fort-elements.git",
-    "fort-behavior": "git@github.com:FortifiElements/fort-behavior.git",
+    "cube-elements": "git@github.com:CubexElements/cube-elements.git",
+    "cube-behavior": "git@github.com:CubexElements/cube-behavior.git",
     "paper-item": "PolymerElements/paper-item#2.0-preview",
     "paper-input": "PolymerElements/paper-input#2.0-preview",
     "iron-icon": "PolymerElements/iron-icon#2.0-preview"

@@ -8,18 +8,18 @@ A List Item
 
 Example:
 
-    <forti-li></fort-li>
+    <cubei-li></cube-li>
 
 Example:
 
-    <fort-li>
+    <cube-li>
       <h2>Hello seed-element</h2>
-    </fort-li>
+    </cube-li>
 
-@demo demo/fort-li.html
+@demo demo/cube-li.html
 -->
 
-<dom-module id="fort-li" attributes="multi-line">
+<dom-module id="cube-li" attributes="multi-line">
   <template strip-whitespace>
     <style>
       :host {
@@ -31,8 +31,8 @@ Example:
         line-height: 26px;
         min-height: 48px;
 
-        @apply --fort-li-style;
-        @apply --fort-li-border-style;
+        @apply --cube-li-style;
+        @apply --cube-li-border-style;
       }
 
       :host([hidden]) {
@@ -47,50 +47,50 @@ Example:
        * if host-context is deprecated, a shared behavior could be used to propagate list properties
        * see:  https://github.com/PolymerElements/app-storage/blob/master/app-network-status-behavior.html
        */
-      :host-context(fort-list-menu):host(:hover):after {
+      :host-context(cube-list-menu):host(:hover):after {
         @apply --layout-fit;
-        background: var(--fort-li-hover-color, currentColor);
+        background: var(--cube-li-hover-color, currentColor);
         content: '';
         opacity: var(--dark-divider-opacity);
         pointer-events: none;
       }
 
-      :host-context(fort-list-menu):host(:focus):before,
-      :host-context(fort-list-menu):host([focused]):before {
+      :host-context(cube-list-menu):host(:focus):before,
+      :host-context(cube-list-menu):host([focused]):before {
         @apply --layout-fit;
-        background: var(--fort-li-focus-color, transparent);
+        background: var(--cube-li-focus-color, transparent);
         content: '';
         opacity: var(--dark-divider-opacity);
         pointer-events: none;
       }
 
-      :host-context(fort-list-menu):host(:active):after {
+      :host-context(cube-list-menu):host(:active):after {
         @apply --layout-fit;
-        background: var(--fort-li-active-color, currentColor);
+        background: var(--cube-li-active-color, currentColor);
         content: '';
         opacity: var(--dark-divider-opacity);
         pointer-events: none;
       }
 
-      :host([odd]):host-context(fort-list[zebra],fort-list-menu[zebra]) {
+      :host([odd]):host-context(cube-list[zebra],cube-list-menu[zebra]) {
         background: var(--theme-300-color, #F0F6FA);
       }
 
-      :host-context(fort-list[border],fort-list-menu[border]),
-      :host-context(fort-list[double-border],fort-list-menu[double-border]) {
-        border-bottom: 1px solid var(--fort-list-border-color, rgba(0, 0, 0, 0.06));
+      :host-context(cube-list[border],cube-list-menu[border]),
+      :host-context(cube-list[double-border],cube-list-menu[double-border]) {
+        border-bottom: 1px solid var(--cube-list-border-color, rgba(0, 0, 0, 0.06));
       }
 
-      :host-context(fort-list[border],fort-list-menu[border]):host([last-item]),
-      :host-context(fort-list[double-border],fort-list-menu[double-border]):host([last-item]) {
+      :host-context(cube-list[border],cube-list-menu[border]):host([last-item]),
+      :host-context(cube-list[double-border],cube-list-menu[double-border]):host([last-item]) {
         border-bottom-color: transparent;
       }
 
-      :host-context(fort-list[double-border],fort-list-menu[double-border]) {
-        border-top: 1px solid var(--fort-list-double-border-color, rgba(255, 255, 255, 1));
+      :host-context(cube-list[double-border],cube-list-menu[double-border]) {
+        border-top: 1px solid var(--cube-list-double-border-color, rgba(255, 255, 255, 1));
       }
 
-      :host-context(fort-list-menu) {
+      :host-context(cube-list-menu) {
         cursor: pointer;
         -webkit-touch-callout: none; /* iOS Safari */
         -webkit-user-select: none; /* Chrome/Safari/Opera */
@@ -100,7 +100,7 @@ Example:
         user-select: none; /* Non-prefixed version, currently not supported by any browser */
       }
 
-      :host fort-icon {
+      :host cube-icon {
         width: var(--paper-item-icon-width, 56px);
         padding: 0;
         color: var(--text-color);
@@ -137,7 +137,7 @@ Example:
         text-overflow: ellipsis;
         overflow: hidden;
 
-        @apply --fort-li-footer;
+        @apply --cube-li-footer;
       }
 
       #iconContainer {
@@ -163,7 +163,7 @@ Example:
       }
 
       #wrapper {
-        @apply --fort-li-content-style;
+        @apply --cube-li-content-style;
       }
     </style>
 
@@ -190,7 +190,7 @@ Example:
   <script>
     Polymer(
       {
-        is:         'fort-li',
+        is:         'cube-li',
         properties: {
           odd:       {type: Boolean, reflectToAttribute: true, value: false},
           firstItem: {type: Boolean, reflectToAttribute: true, value: false},

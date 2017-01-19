@@ -1,19 +1,19 @@
 <link rel="import" href="../polymer/polymer.html">
-<link rel="import" href="../fort-behavior/fort-iterator-behavior.html">
+<link rel="import" href="../cube-behavior/cube-iterator-behavior.html">
 
 <!--
 A List
 
 Example:
 
-    <forti-list-group title="Group Name">
-      <fort-li></fort-li>
-    </fort-list-group>
+    <cubei-list-group title="Group Name">
+      <cube-li></cube-li>
+    </cube-list-group>
 
 @demo demo/index.html
 -->
 
-<dom-module id="fort-list-group" attributes="title">
+<dom-module id="cube-list-group" attributes="title">
   <template strip-whitespace>
     <style>
       :host(:focus) {
@@ -22,12 +22,12 @@ Example:
 
       h2 {
         padding: 0 16px;
-        @apply --fort-header;
-        @apply --fort-list-group-title;
+        @apply --cube-header;
+        @apply --cube-list-group-title;
       }
 
       :host-context([border-group]) .list-group {
-        border: 1px solid var(--fort-list-border-color, rgba(0, 0, 0, 0.12));
+        border: 1px solid var(--cube-list-border-color, rgba(0, 0, 0, 0.12));
       }
     </style>
 
@@ -42,7 +42,7 @@ Example:
   <script>
     Polymer(
       {
-        is:         'fort-list-group',
+        is:         'cube-list-group',
         properties: {title: String}
       }
     );
