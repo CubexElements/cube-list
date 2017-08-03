@@ -19,7 +19,7 @@ Example:
 @demo demo/cube-li.html
 -->
 
-<dom-module id="cube-li" attributes="multi-line compact-icon">
+<dom-module id="cube-li" attributes="compact">
   <template strip-whitespace>
     <style>
       :host {
@@ -28,11 +28,15 @@ Example:
         padding: 0;
         display: block;
         box-sizing: border-box;
-        line-height: 26px;
+        line-height: 24px;
         min-height: 48px;
 
         @apply --cube-li-style;
         @apply --cube-li-border-style;
+      }
+
+      :host([compact]) {
+        line-height: 22px;
       }
 
       :host([hidden]) {
@@ -111,6 +115,10 @@ Example:
         padding: 9px 0;
       }
 
+      :host([compact]) paper-item-body {
+        padding: 7px 0;
+      }
+
       :host paper-item-body[two-line] {
         min-height: initial;
       }
@@ -124,7 +132,7 @@ Example:
 
         white-space: normal;
         max-height: 32px;
-        line-height: 16px;
+        line-height: 18px;
       }
 
       #footerSlot::slotted(*) {
@@ -153,7 +161,7 @@ Example:
         margin-right: 56px;
       }
 
-      :host([compact-icon]) #iconSlot::slotted(*) {
+      :host([compact]) #iconSlot::slotted(*) {
         margin-right: 16px;
       }
 
@@ -196,11 +204,10 @@ Example:
       {
         is:         'cube-li',
         properties: {
-          odd:         {type: Boolean, reflectToAttribute: true, value: false},
-          firstItem:   {type: Boolean, reflectToAttribute: true, value: false},
-          lastItem:    {type: Boolean, reflectToAttribute: true, value: false},
-          compactIcon: {type: Boolean, reflectToAttribute: true, value: false},
-          multiLine:   {type: Boolean, value: false}
+          odd:       {type: Boolean, reflectToAttribute: true, value: false},
+          firstItem: {type: Boolean, reflectToAttribute: true, value: false},
+          lastItem:  {type: Boolean, reflectToAttribute: true, value: false},
+          compact:   {type: Boolean, reflectToAttribute: true, value: false}
         },
 
         /**
