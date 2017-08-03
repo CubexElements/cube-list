@@ -19,7 +19,7 @@ Example:
 @demo demo/cube-li.html
 -->
 
-<dom-module id="cube-li" attributes="compact">
+<dom-module id="cube-li" attributes="compact multi-line">
   <template strip-whitespace>
     <style>
       :host {
@@ -111,7 +111,6 @@ Example:
       }
 
       :host paper-item-body {
-        overflow: visible;
         padding: 9px 0;
       }
 
@@ -129,10 +128,15 @@ Example:
 
       #secondarySlot::slotted(*) {
         @apply --text-secondary;
-
-        white-space: normal;
         max-height: 32px;
         line-height: 18px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+
+      :host([multi-line]) #secondarySlot::slotted(*) {
+        white-space: normal;
+        max-height: initial;
       }
 
       #footerSlot::slotted(*) {
@@ -207,7 +211,8 @@ Example:
           odd:       {type: Boolean, reflectToAttribute: true, value: false},
           firstItem: {type: Boolean, reflectToAttribute: true, value: false},
           lastItem:  {type: Boolean, reflectToAttribute: true, value: false},
-          compact:   {type: Boolean, reflectToAttribute: true, value: false}
+          compact:   {type: Boolean, reflectToAttribute: true, value: false},
+          multiLine: {type: Boolean, reflectToAttribute: true, value: false}
         },
 
         /**
